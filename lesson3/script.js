@@ -7,7 +7,7 @@
 let money = 30000, // доход за месяц
     income = 'Фриланс',
     deposit = true,
-    mission = 100000 + ' баксов',
+    mission = 1000000,
     period = 12,
     addExpenses = 'Жилье, Транспорт, Гульки, Шмульки';
 
@@ -59,10 +59,10 @@ let budgetMonth = money - (amount1 + amount2); // Бюджет на месяц
 console.log(budgetMonth);
 
 // за сколько месяцев будет достигнута цель mission
-mission = Math.ceil(parseInt(mission) - (budgetMonth / 67));
-console.log(mission);
+let target = Math.ceil(mission / budgetMonth); // за сколько будеь достигнута цель
+console.log(target);
 
-// поправляем дневной бюджет
+// // поправляем дневной бюджет
 budgetDay = Math.floor(budgetMonth / 30);
 console.log(budgetDay);
 
@@ -76,3 +76,5 @@ if (budgetDay >= 1200) {
 } else if (budgetDay < 0) {
     console.log('Что то пошло не так');
 }
+
+// console.log(target);
