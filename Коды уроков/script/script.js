@@ -575,3 +575,134 @@
 // Проще в понимании
 // Проще в тестировании
 // Результат всегда одинаковый
+
+
+
+/////////////////////////////////////////////////////////////////////
+/////////////////// Пятый Урок /////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+// Циклы
+
+// рекурсия 
+
+// function changeTires(snowTires) {
+//     /*  демонтаж, разбортовка, забортовка, давление, 
+//    балансировка, монтаж */
+//     snowTires--;
+//     console.log(snowTires);
+
+//     if (snowTires > 0) {
+//         changeTires(snowTires);
+//     }
+
+// };
+// changeTires(4);
+
+
+////////////////////////////
+// Циклические свойства/////
+
+//while() -- делай пока.. запускается пока тру
+
+// let n = 0;
+
+// while (n < 5) { //условия (работает до тех пор пока...)
+//     console.log(n);
+//     n++;
+// };
+
+
+// do while -- запустится один раз по любэ
+
+// let n = 0;
+// do {
+//     console.log(n);
+//     n++;
+// }
+// while (n < 5);
+// while (n === 5); -- 0 все равно пройдет одна интерация!
+
+// for
+
+// for (начало; когда остановить; что происходит) {
+// тело цикла(действия при каждой интерации цикла)
+// };
+
+// let n = 0;
+
+// for (let i = 0; i < 5; i++) {
+//     console.log(i);             /// 0 -- 4;
+// };
+
+// Остановка цикла break; continue;
+
+// for (let i = 0; i < 10; i++) {
+
+//     if (i === 4) {
+//         continue;
+//     }
+
+//     if (i === 8) {
+//         break;
+//     }
+
+//     console.log(i);
+// };
+
+
+////////////////////////////////////////////
+///////////////////////////////////////////
+////////// Практика циклы ////////////////
+//////////////////////////////////////////
+
+let money = 30000,
+    mission = 100000,
+    deposit = true,
+    period = 12;
+
+let showTypeOf = function (item) {
+    console.log(typeof item);
+};
+showTypeOf(money);
+showTypeOf(mission);
+showTypeOf(deposit);
+
+// let expenses1 = prompt('Введите обязательную статью расходов - 1', 'Название'),
+//     expenses1Amount = +prompt('Во сколько это обойдется?'),
+//     expenses2 = prompt('Введите обязательную статью расходов - 2', 'Название'),
+//     expenses2Amount = +prompt('Во сколько это обойдется?');
+
+// console.log(addExpenses.toLowerCase().split(','));
+
+let expenses1, expenses2;
+let getExpensesMonth = function () {
+    let sum = 0;
+
+    for (let i = 0; i < 2; i++) {
+        if (i === 0) {
+            expenses1 = prompt('Введите обязательную статью расходов - 1', 'Название');
+        } else if (i === 1) {
+            expenses2 = prompt('Введите обязательную статью расходов - 2', 'Название');
+        }
+
+        sum += +prompt('Во сколько это обойдется?');
+    }
+
+    console.log('Расходы за месяц: ' + sum);
+    return sum;
+};
+
+let expensesAmount = getExpensesMonth();
+
+// console.log('Расходы за месяц ' + expensesAmount);
+
+let getAccumulateMonth = function () {
+    return money - expensesAmount;
+};
+
+let accumulatedMonth = getAccumulateMonth();
+
+let getTargetMonth = function () {
+    return mission / accumulatedMonth;
+};
