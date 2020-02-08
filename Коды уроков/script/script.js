@@ -757,7 +757,7 @@
 
 // console.log(one()); // 25
 
-'use strict';
+// 'use strict';
 
 // let a = 50;
 
