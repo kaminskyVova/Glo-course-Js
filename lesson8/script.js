@@ -1,6 +1,8 @@
 'use strict';
 
-
+/////////////////////////////////////////////
+//////////////урок восьмой///////////////////
+///////////////////////////////////////////
 
 let isNumber = function (n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -174,7 +176,7 @@ const appData = {
 
         let costs = '';
         do {
-            costs = prompt('Введите дополнительные статьи расходов', 'Водка, Бабы, Опохмел').trim();
+            costs = prompt('Введите дополнительные статьи расходов', 'водка, бабы, опохмел').trim();
         }
         while (costs === '')
 
@@ -223,8 +225,29 @@ console.log(appData.getStatusIncome()); // анализ доходов(конс�
 appData.getTargetMonth(); // срок достижение цели
 console.log(appData); // объект
 
-// раскладуем объект
-// разбиваем на ключи -- свойства
-// for (let key in appData) {
-//     console.log('Наша программа включает в себя данные: ' + key + ' - ' + appData[key]);
-// };
+// // раскладуем объект
+// // разбиваем на ключи -- свойства
+// // for (let key in appData) {
+// //     console.log('Наша программа включает в себя данные: ' + key + ' - ' + appData[key]);
+// // };
+
+
+// /////////////////////////////////////////////////////////////////////////
+// let k = 0,
+//     result = '';
+
+// function firstLetterst() {
+//     for (var i = 0; i < appData.addExpenses.length; i++) {
+//         if (isNaN(appData.addExpenses[i]) && k == 0) {
+//             result += appData.addExpenses.charAt(i).toUpperCase();
+//             k += 1;
+//         } else if (isNaN(appData.addExpenses[i]) && appData.addExpenses[i - 1] == ' ') {
+//             result += appData.addExpenses.charAt(i).toUpperCase();
+//         } else {
+//             result += appData.addExpenses[i];
+//         }
+//     }
+//     console.log(result);
+// }
+// firstLetterst();
+/////////////////////////////////////////////////////
