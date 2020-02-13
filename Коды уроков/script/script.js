@@ -1100,6 +1100,118 @@
 // test(1, 2, 3, 4, 5);
 
 
+
 ///////////////////////////////////////////////
-/////////////Практика//////////////////////////
+/////////////Урок девятый//////////////////////
 ///////////////////////////////////////////////
+
+// Получение элементов со страници
+
+// document -- корень
+// console.log(document); -- выведет всю структуру документа
+// console.log(document.children); -- выведет всю колекцию элементов с их свойствами
+
+//Методы нахождения элементов
+
+console.log(document.getElementById('one_span')); // получаем элемент по йд 
+console.log(document.getElementsByClassName('hello')); // получаем массив элементов по классу// без методов -- HtmlColection
+console.log(document.getElementsByTagName('h1')); // получаем массив элементов по тэгу
+
+// получение отдельного элемента из полученого массива(по классу или айди)
+// при помощи индекса элемента в массиве(нач с 0)
+console.log(document.getElementsByClassName('hello')[1]);
+console.log(document.getElementsByTagName('h1')[0]);
+
+// Удобный способ!
+console.log(document.querySelector('h1')); // по тэгу 
+console.log(document.querySelector('.hello')); //по классу но получаем только верхний элемент
+console.log(document.querySelector('#one_span')); //по id
+
+console.log(document.querySelectorAll('.hello')); // получаем все элементы с данным классом // с методами NodeList
+
+//управление получиными элементами
+
+// присвоение значения в пременную
+let myElem = document.querySelectorAll('.hello');
+console.log(myElem);
+
+// получение атрибута
+console.log(myElem.getAttribute('id')); // получаем значение(сам айди) эллемента кот присвоенно айди
+
+// добавление css свойств элементам
+myElem.setAttribute('style', 'font-size: 24px');
+
+//все элементы которые есть в HTML мы можем использовать как свойства
+let myVar = document.querySelector('main'); // тег main
+console.log(myVar.title); // у него есть свойство title и мы получили его значение
+
+// так же можно задавать свое значение меняя предыдущее
+myVar.title = "Урок по DOM";
+console.log(myVar.title);
+
+//что бы получить класс нужно прописать className
+
+myVar2 = document.querySelector('#one_p'); // получили весь элемент с айди
+console.log(myVar2.classList); // получили коллекцию со всеми классами
+
+// Удаление и прибовление классов
+// добавим
+myVar2.classList.add('js'); // в скобках класс кот хотим добавить
+
+// удалим
+myVar2.classList.remuve('hi');
+
+
+//Работа с несколькими элементами
+// есть 2 списка ul class="colections" и ol class="collections" и li class="elem" 
+let collect = document.querySelectorAll('.collections'),
+    elem = document.querySelectorAll('.elem');
+
+console.log(collect, elem);
+
+//удаление элементов из коллекций
+collect[0].removeChild(elem[3]); // первая коллекция(по индексу из 2х) удаляем из нее 3й элемент(ребенок)
+// добавим эллемент
+collect[0].appendChild(elem[3]); // вернули его в конец списка
+collect[1].appendChild(elem[3]); // добавили его во вторую коллекцию(список ол)
+// переместим еще пару элементов из одного списка в другой
+collect[1].appendChild(elem[5]);
+collect[1].appendChild(elem[0]);
+collect[1].appendChild(elem[1]);
+
+// пермещение в конкретное место
+collect[0].insertBefore(elem[5]);
+collect[0].insertBefore(elem[4], elem[2]); // первым прараметром указываем какой элемент хотим преместить а вторым перед каким
+collect[0].insertBefore(elem[4], null); // если указать null то переместиться в конец как и appendChaild
+
+// замена элемента
+collect[0].replaceChild(elem[4], elem[2]); // первый каким элементом второй какой элемент им заменить
+// показать заменненый элемент
+let elemRep = collect[0].replaceChild(elem[4], elem[2]);
+console.log(elemRep);
+//вставляем замененый элемент во второй список (но можно куда угодно)
+collect[1].appendChild(elemRep);
+
+
+// копирование элементов
+let elemClone = elem[2].cloneNode(); // скопировали элемент
+elem[1].appendChild(elemClone); // перенесли его во второй список (НО БЕЗ ЕГО СОДЕРЖИМОГО!!!)
+
+// что бы клонировать все содержимое со всеми "детми" нужно добавить параметр true (передает обсалютно все что вложенно в элемент)
+// но так как принимает булиновое значение то если зададим в параметре цифру то тоже перенесет НО 0 выдаст false
+let elemClone = elem[2].cloneNode(true);
+
+
+//создание элементов
+
+console.log(collect[0].innerHTML); // возвращает разметку внетри коллекции
+console.log(collect[0].textContent); // возвращает только содержимое тегов
+
+// добавляем текст
+collect[0].textContent = 'Новый текст'; //добавляет текст(затирает предыдущий) но не меняет разметку
+collect[0].innerHTML = '<b>Новый текст</b>'; // добавляет разметку но перетирает предыдущую
+
+// добавляем новый элемент
+let newElem = document.createElement('li'); // принимает ввиде строги тег который хотим добавить в разметку
+newElem.textContent = 'новый текст';
+collect[1].appendChild(newElem); // добавили в разметку тег ли
