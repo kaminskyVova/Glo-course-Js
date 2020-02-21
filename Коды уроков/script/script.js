@@ -1113,105 +1113,336 @@
 
 //Методы нахождения элементов
 
-console.log(document.getElementById('one_span')); // получаем элемент по йд 
-console.log(document.getElementsByClassName('hello')); // получаем массив элементов по классу// без методов -- HtmlColection
-console.log(document.getElementsByTagName('h1')); // получаем массив элементов по тэгу
+// console.log(document.getElementById('one_span')); // получаем элемент по йд 
+// console.log(document.getElementsByClassName('hello')); // получаем массив элементов по классу// без методов -- HtmlColection
+// console.log(document.getElementsByTagName('h1')); // получаем массив элементов по тэгу
 
-// получение отдельного элемента из полученого массива(по классу или айди)
-// при помощи индекса элемента в массиве(нач с 0)
-console.log(document.getElementsByClassName('hello')[1]);
-console.log(document.getElementsByTagName('h1')[0]);
+// // получение отдельного элемента из полученого массива(по классу или айди)
+// // при помощи индекса элемента в массиве(нач с 0)
+// console.log(document.getElementsByClassName('hello')[1]);
+// console.log(document.getElementsByTagName('h1')[0]);
 
-// Удобный способ!
-console.log(document.querySelector('h1')); // по тэгу 
-console.log(document.querySelector('.hello')); //по классу но получаем только верхний элемент
-console.log(document.querySelector('#one_span')); //по id
+// // Удобный способ!
+// console.log(document.querySelector('h1')); // по тэгу 
+// console.log(document.querySelector('.hello')); //по классу но получаем только верхний элемент
+// console.log(document.querySelector('#one_span')); //по id
 
-console.log(document.querySelectorAll('.hello')); // получаем все элементы с данным классом // с методами NodeList
+// console.log(document.querySelectorAll('.hello')); // получаем все элементы с данным классом // с методами NodeList
 
-//управление получиными элементами
+// //управление получиными элементами
 
-// присвоение значения в пременную
-let myElem = document.querySelectorAll('.hello');
-console.log(myElem);
+// // присвоение значения в пременную
+// let myElem = document.querySelectorAll('.hello');
+// console.log(myElem);
 
-// получение атрибута
-console.log(myElem.getAttribute('id')); // получаем значение(сам айди) эллемента кот присвоенно айди
+// // получение атрибута
+// console.log(myElem.getAttribute('id')); // получаем значение(сам айди) эллемента кот присвоенно айди
 
-// добавление css свойств элементам
-myElem.setAttribute('style', 'font-size: 24px');
+// // добавление css свойств элементам
+// myElem.setAttribute('style', 'font-size: 24px');
 
-//все элементы которые есть в HTML мы можем использовать как свойства
-let myVar = document.querySelector('main'); // тег main
-console.log(myVar.title); // у него есть свойство title и мы получили его значение
+// //все элементы которые есть в HTML мы можем использовать как свойства
+// let myVar = document.querySelector('main'); // тег main
+// console.log(myVar.title); // у него есть свойство title и мы получили его значение
 
-// так же можно задавать свое значение меняя предыдущее
-myVar.title = "Урок по DOM";
-console.log(myVar.title);
+// // так же можно задавать свое значение меняя предыдущее
+// myVar.title = "Урок по DOM";
+// console.log(myVar.title);
 
-//что бы получить класс нужно прописать className
+// //что бы получить класс нужно прописать className
 
-myVar2 = document.querySelector('#one_p'); // получили весь элемент с айди
-console.log(myVar2.classList); // получили коллекцию со всеми классами
+// myVar2 = document.querySelector('#one_p'); // получили весь элемент с айди
+// console.log(myVar2.classList); // получили коллекцию со всеми классами
 
-// Удаление и прибовление классов
-// добавим
-myVar2.classList.add('js'); // в скобках класс кот хотим добавить
+// // Удаление и прибавление классов
+// // добавим
+// myVar2.classList.add('js'); // в скобках класс кот хотим добавить
 
-// удалим
-myVar2.classList.remuve('hi');
-
-
-//Работа с несколькими элементами
-// есть 2 списка ul class="colections" и ol class="collections" и li class="elem" 
-let collect = document.querySelectorAll('.collections'),
-    elem = document.querySelectorAll('.elem');
-
-console.log(collect, elem);
-
-//удаление элементов из коллекций
-collect[0].removeChild(elem[3]); // первая коллекция(по индексу из 2х) удаляем из нее 3й элемент(ребенок)
-// добавим эллемент
-collect[0].appendChild(elem[3]); // вернули его в конец списка
-collect[1].appendChild(elem[3]); // добавили его во вторую коллекцию(список ол)
-// переместим еще пару элементов из одного списка в другой
-collect[1].appendChild(elem[5]);
-collect[1].appendChild(elem[0]);
-collect[1].appendChild(elem[1]);
-
-// пермещение в конкретное место
-collect[0].insertBefore(elem[5]);
-collect[0].insertBefore(elem[4], elem[2]); // первым прараметром указываем какой элемент хотим преместить а вторым перед каким
-collect[0].insertBefore(elem[4], null); // если указать null то переместиться в конец как и appendChaild
-
-// замена элемента
-collect[0].replaceChild(elem[4], elem[2]); // первый каким элементом второй какой элемент им заменить
-// показать заменненый элемент
-let elemRep = collect[0].replaceChild(elem[4], elem[2]);
-console.log(elemRep);
-//вставляем замененый элемент во второй список (но можно куда угодно)
-collect[1].appendChild(elemRep);
+// // удалим
+// myVar2.classList.remuve('hi');
 
 
-// копирование элементов
-let elemClone = elem[2].cloneNode(); // скопировали элемент
-elem[1].appendChild(elemClone); // перенесли его во второй список (НО БЕЗ ЕГО СОДЕРЖИМОГО!!!)
+// //Работа с несколькими элементами
+// // есть 2 списка ul class="colections" и ol class="collections" и li class="elem" 
+// let collect = document.querySelectorAll('.collections'),
+//     elem = document.querySelectorAll('.elem');
 
-// что бы клонировать все содержимое со всеми "детми" нужно добавить параметр true (передает обсалютно все что вложенно в элемент)
-// но так как принимает булиновое значение то если зададим в параметре цифру то тоже перенесет НО 0 выдаст false
-let elemClone = elem[2].cloneNode(true);
+// console.log(collect, elem);
+
+// //удаление элементов из коллекций
+// collect[0].removeChild(elem[3]); // первая коллекция(по индексу из 2х) удаляем из нее 3й элемент(ребенок)
+// // добавим эллемент
+// collect[0].appendChild(elem[3]); // вернули его в конец списка
+// collect[1].appendChild(elem[3]); // добавили его во вторую коллекцию(список ол)
+// // переместим еще пару элементов из одного списка в другой
+// collect[1].appendChild(elem[5]);
+// collect[1].appendChild(elem[0]);
+// collect[1].appendChild(elem[1]);
+
+// // пермещение в конкретное место
+// collect[0].insertBefore(elem[5]);
+// collect[0].insertBefore(elem[4], elem[2]); // первым прараметром указываем какой элемент хотим преместить а вторым перед каким
+// collect[0].insertBefore(elem[4], null); // если указать null то переместиться в конец как и appendChaild
+
+// // замена элемента
+// collect[0].replaceChild(elem[4], elem[2]); // первый каким элементом второй какой элемент им заменить
+// // показать заменненый элемент
+// let elemRep = collect[0].replaceChild(elem[4], elem[2]);
+// console.log(elemRep);
+// //вставляем замененый элемент во второй список (но можно куда угодно)
+// collect[1].appendChild(elemRep);
 
 
-//создание элементов
+// // копирование элементов
+// let elemClone = elem[2].cloneNode(); // скопировали элемент
+// elem[1].appendChild(elemClone); // перенесли его во второй список (НО БЕЗ ЕГО СОДЕРЖИМОГО!!!)
 
-console.log(collect[0].innerHTML); // возвращает разметку внетри коллекции
-console.log(collect[0].textContent); // возвращает только содержимое тегов
+// // что бы клонировать все содержимое со всеми "детми" нужно добавить параметр true (передает обсалютно все что вложенно в элемент)
+// // но так как принимает булиновое значение то если зададим в параметре цифру то тоже перенесет НО 0 выдаст false
+// let elemClone = elem[2].cloneNode(true);
 
-// добавляем текст
-collect[0].textContent = 'Новый текст'; //добавляет текст(затирает предыдущий) но не меняет разметку
-collect[0].innerHTML = '<b>Новый текст</b>'; // добавляет разметку но перетирает предыдущую
 
-// добавляем новый элемент
-let newElem = document.createElement('li'); // принимает ввиде строги тег который хотим добавить в разметку
-newElem.textContent = 'новый текст';
-collect[1].appendChild(newElem); // добавили в разметку тег ли
+// //создание элементов
+
+// console.log(collect[0].innerHTML); // возвращает разметку внетри коллекции
+// console.log(collect[0].textContent); // возвращает только содержимое тегов
+
+// // добавляем текст
+// collect[0].textContent = 'Новый текст'; //добавляет текст(затирает предыдущий) но не меняет разметку
+// collect[0].innerHTML = '<b>Новый текст</b>'; // добавляет разметку но перетирает предыдущую
+
+// // добавляем новый элемент
+// let newElem = document.createElement('li'); // принимает ввиде строги тег который хотим добавить в разметку
+// newElem.textContent = 'новый текст';
+// collect[1].appendChild(newElem); // добавили в разметку тег ли
+
+
+
+
+//////////////////////////////////////////////////////////////
+///////////////Урок одинадцатый///////////////////////////////
+//////////////////////////////////////////////////////////////
+
+
+//Обработчик событий
+
+// есть див квадрат класс square
+// get square 
+let square = document.querySelector('.square');
+console.dir(square); // консоль дир выводит в виде объекта(так можно увидеть все свойства объекта)
+
+// вешаем клик
+square.onclick = function () {
+    console.log('вы кликнули на квадрат');
+};
+
+// События которые на элементе проверяем через консоль вкладка Event Listeners выбираем не отработанные события и смотрим на каком элементе
+
+// ограничиваем кол-во кликов
+//костыль весь onclick так не делают то есть не используют его
+let count = 0;
+square.onclick = function () {
+    if (count === 3) {
+        console.log('Упс')
+        return;
+    }
+    count++;
+    console.log('вы кликнули на квадрат');
+};
+// костыль полсле 3х кликов счет остановится но будет отрабатывать Упс
+
+// Как можно сделать без костылей
+square.onclick = function () {
+    if (count === 3) {
+        console.log('Упс')
+        square.onclick = null; // остановит клик полсе 3х
+        return;
+    }
+    count++;
+    console.log('вы кликнули на квадрат');
+};
+
+// Запускаем 2 функции по одному клику
+square.onclick = function () {
+    console.log('Вторая функция');
+};
+// отработает только вторая тк перезаписалась
+
+// Исправляем добавляем addEventListener навешивание слушателя
+// принимает три параметра 2 из которых обязательные
+// первый параметр событие(только уже без on)/действие 
+// второй параметр функция кот обрабатывает событие
+
+square.addEventListener('click', function () {
+    console.log('клик клик клик');
+});
+
+// вешаем несколько событий
+square.addEventListener('click', function () {
+    console.log('клик клик клик');
+});
+square.addEventListener('click', function () {
+    console.log('клак клак клак');
+});
+square.addEventListener('click', function () {
+    console.log('клиииик клиииик клиииик');
+});
+// они все 3 срабатывают по клику
+
+
+// Ограничение кликов
+// используем removeEventListener только с именной функцией
+
+// создаем именную 
+let clicked = function () {
+    console.log('клиииик клиииик клиииик');
+};
+
+// потом просто передаем вторым параметром имя функции
+let clicked = function () {
+    count++;
+    if (count === 3) square.removeEventListener('click', clicked); //отанавливаем обработчик
+    console.log('клиииик клиииик клиииик');
+};
+
+square.addEventListener('click', clicked); // вызов
+
+// У каждого события есть объект события который доступен только функции обработчику события что бы его получить и получить все его свойства нужно добавить event или просто e
+
+let square = document.querySelector('.square');
+
+let eventFunc = function (event) {
+    console.log(event);
+};
+
+square.addEventListener('click', eventFunc); // клик
+// повесим еще несколько событий
+square.addEventListener('mouseup', eventFunc); // клик отжат
+square.addEventListener('mousedown', eventFunc); // клик нажат
+square.addEventListener('mousemove', eventFunc); // движение мыши по объекту
+square.addEventListener('mouseenter', eventFunc); // заводим мышку на объект
+square.addEventListener('mouseleave', eventFunc); // покидаем объект
+square.addEventListener('mouseover', eventFunc); // заводим мышку на объект
+square.addEventListener('mouseout', eventFunc); //покидаем объект
+
+// различия между mouseenter/mouseover mouseleave/mouseout
+
+// mouseover\mouseout если есть объект в оюъекте(круг в квадрате)
+//  то при преходе с одного на другой сработает вход\выход
+// то есть событие срабатывает даже на детей
+
+// mouseenter / mouseleave в этих случаях события по детям не отрабатываются
+
+
+// СОБЫТИЯ ДЛЯ РАБОТЫ С ФОРМАМИ
+
+// получаем инпут по айди получаем изменения(value) в инпуте
+let eventFunc = function (event) {
+    console.log(event.type);
+};
+
+document.querySelector('#text').addEventListener('input', eventFunc); // input событие в консоле будет инпут и колво знаков
+document.querySelector('#text').addEventListener('change', eventFunc); // будет срабатывать при смене фокуса и при изменении значения инпута
+document.querySelector('#text').addEventListener('focus', eventFunc); // срабатывает при клике на инпут
+document.querySelector('#text').addEventListener('blur', eventFunc); // срабатывает при клике вне инпут
+
+// Input range имеет только событие change
+document.querySelector('#range').addEventListener('change', eventFunc); // срабатывает при изменении
+
+// Выведем его значение
+let eventFunc = function (event) {
+    console.log(event.type);
+    console.log(event.target.value); // значение 
+};
+
+// Кнопки
+document.querySelector('#text').addEventListener('keyup', eventFunc); // нажатие кнопки(не мышки) все кнопки
+document.querySelector('#text').addEventListener('keydown', eventFunc); // отжатие кнопки(не мышки) все кнопки
+
+
+// События загрузки документа
+
+// DOMContentLosded
+document.addEventListener('DOMContentLosded', function () {
+    'use strict';
+
+    let eventFunc = function (event) {
+        console.log(event.type);
+        console.log(event.target.value);
+    };
+
+    document.querySelector('#text').addEventListener('keyup', eventFunc);
+});
+// Дождется загрузки всей страницы и сработает скрипт!
+// используется редко и может задерживать загрузку
+
+
+// Событие перед уходом со страници(окно напоминание об сохранении данных на пример) onbeforeunload
+
+window.onbeforeunload = function () {
+    return 'Вы уверены что хотите уйти со страницы?'
+};
+// некоторые браузеры перелавливают сообщение и выводят свое
+
+
+
+///////
+// СОБЫТИЕ ОТМЕНЯЮЩЕЕ СТАНДАРТНОЕ ПОВЕДЕНИЕ БРАУЗЕРА!!!
+
+// preventDefault
+
+// на пример переход по ссылке
+// на пример при нажатии кнопки отменять оправку формы
+// на пример пока не выполнит что то(заполнил форму)
+// на пример хотим при нажатии на ссылку выполнить свои действия
+
+// отмена перехода по ссылке
+document.querySelector('#link').addEventListener('click', function (event)) {
+
+    event.preventDefault(); // отменили переход по данной ссылке
+    console.log('сколько кликов');
+};
+
+// Можно отменять всплытие подсказок(вспомогательное меню) при нажатиии правой кнопки мыши
+
+document.addEventListener('contextmenu', function (event)) {
+
+    event.preventDefault(); // отменили всплытие меню правой мыши
+
+};
+
+
+
+//////
+//////ВСПЛЫТИЕ И ЗАХВАТ СОБЫТИЙ
+// Дано: кнопка\круг\квадрат\боди все одно в другом
+let clickElem = null;
+
+function greenHundler(event) {
+
+    if (clickElem) {
+        clickElem.classList.remove('green'); // удаляем элемент если он не фолс(существует)
+    }
+
+    clickElem = event.currentTarget; // присваиваим новый элемент
+    clickElem.classList.add('green')
+};
+
+//каждому из этих элементов по клику добавится класс green если его нет
+document.querySelector('.event_btn').addEventListener('click', greenHundler);
+document.querySelector('.circle').addEventListener('click', greenHundler);
+document.querySelector('.square').addEventListener('click', greenHundler);
+document.querySelector('.body').addEventListener('click', greenHundler);
+// в данном случае поменятся цвет боди тк все элементы находятся в боди
+// через дебагер если его поставить перед вызовами то по шагам мы увидим как с каждым шагом меняется цвет у всех элементов
+// а не видим цвета у других тк функция их принудительно уберает и бади последний шаг и на нем остается
+// если убрать remove('green')то при нажатии покрасятся все элементы сразу
+
+
+// Что бы посмотреть как работает захват нужно добавить третим параметром true в вызове
+document.querySelector('.event_btn').addEventListener('click', greenHundler, true);
+document.querySelector('.circle').addEventListener('click', greenHundler, true);
+document.querySelector('.square').addEventListener('click', greenHundler, true);
+document.querySelector('.body').addEventListener('click', greenHundler, true);
+
+/////////////////////////////////////////////////////////
