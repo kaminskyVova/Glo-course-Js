@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 // // Первый урок
 
@@ -1228,323 +1228,462 @@
 
 // есть див квадрат класс square
 // get square 
-let square = document.querySelector('.square');
-console.dir(square); // консоль дир выводит в виде объекта(так можно увидеть все свойства объекта)
+// let square = document.querySelector('.square');
+// console.dir(square); // консоль дир выводит в виде объекта(так можно увидеть все свойства объекта)
 
-// вешаем клик
-square.onclick = function () {
-    console.log('вы кликнули на квадрат');
-};
+// // вешаем клик
+// square.onclick = function () {
+//     console.log('вы кликнули на квадрат');
+// };
 
-// События которые на элементе проверяем через консоль вкладка Event Listeners выбираем не отработанные события и смотрим на каком элементе
+// // События которые на элементе проверяем через консоль вкладка Event Listeners выбираем не отработанные события и смотрим на каком элементе
 
-// ограничиваем кол-во кликов
-//костыль весь onclick так не делают то есть не используют его
-let count = 0;
-square.onclick = function () {
-    if (count === 3) {
-        console.log('Упс')
-        return;
+// // ограничиваем кол-во кликов
+// //костыль весь onclick так не делают то есть не используют его
+// let count = 0;
+// square.onclick = function () {
+//     if (count === 3) {
+//         console.log('Упс')
+//         return;
+//     }
+//     count++;
+//     console.log('вы кликнули на квадрат');
+// };
+// // костыль полсле 3х кликов счет остановится но будет отрабатывать Упс
+
+// // Как можно сделать без костылей
+// square.onclick = function () {
+//     if (count === 3) {
+//         console.log('Упс')
+//         square.onclick = null; // остановит клик полсе 3х
+//         return;
+//     }
+//     count++;
+//     console.log('вы кликнули на квадрат');
+// };
+
+// // Запускаем 2 функции по одному клику
+// square.onclick = function () {
+//     console.log('Вторая функция');
+// };
+// // отработает только вторая тк перезаписалась
+
+// // Исправляем добавляем addEventListener навешивание слушателя
+// // принимает три параметра 2 из которых обязательные
+// // первый параметр событие(только уже без on)/действие 
+// // второй параметр функция кот обрабатывает событие
+
+// square.addEventListener('click', function () {
+//     console.log('клик клик клик');
+// });
+
+// // вешаем несколько событий
+// square.addEventListener('click', function () {
+//     console.log('клик клик клик');
+// });
+// square.addEventListener('click', function () {
+//     console.log('клак клак клак');
+// });
+// square.addEventListener('click', function () {
+//     console.log('клиииик клиииик клиииик');
+// });
+// // они все 3 срабатывают по клику
+
+
+// // Ограничение кликов
+// // используем removeEventListener только с именной функцией
+
+// // создаем именную 
+// let clicked = function () {
+//     console.log('клиииик клиииик клиииик');
+// };
+
+// // потом просто передаем вторым параметром имя функции
+// let clicked = function () {
+//     count++;
+//     if (count === 3) square.removeEventListener('click', clicked); //отанавливаем обработчик
+//     console.log('клиииик клиииик клиииик');
+// };
+
+// square.addEventListener('click', clicked); // вызов
+
+// // У каждого события есть объект события который доступен только функции обработчику события что бы его получить и получить все его свойства нужно добавить event или просто e
+
+// let square = document.querySelector('.square');
+
+// let eventFunc = function (event) {
+//     console.log(event);
+// };
+
+// square.addEventListener('click', eventFunc); // клик
+// // повесим еще несколько событий
+// square.addEventListener('mouseup', eventFunc); // клик отжат
+// square.addEventListener('mousedown', eventFunc); // клик нажат
+// square.addEventListener('mousemove', eventFunc); // движение мыши по объекту
+// square.addEventListener('mouseenter', eventFunc); // заводим мышку на объект
+// square.addEventListener('mouseleave', eventFunc); // покидаем объект
+// square.addEventListener('mouseover', eventFunc); // заводим мышку на объект
+// square.addEventListener('mouseout', eventFunc); //покидаем объект
+
+// // различия между mouseenter/mouseover mouseleave/mouseout
+
+// // mouseover\mouseout если есть объект в оюъекте(круг в квадрате)
+// //  то при преходе с одного на другой сработает вход\выход
+// // то есть событие срабатывает даже на детей
+
+// // mouseenter / mouseleave в этих случаях события по детям не отрабатываются
+
+
+// // СОБЫТИЯ ДЛЯ РАБОТЫ С ФОРМАМИ
+
+// // получаем инпут по айди получаем изменения(value) в инпуте
+// let eventFunc = function (event) {
+//     console.log(event.type);
+// };
+
+// document.querySelector('#text').addEventListener('input', eventFunc); // input событие в консоле будет инпут и колво знаков
+// document.querySelector('#text').addEventListener('change', eventFunc); // будет срабатывать при смене фокуса и при изменении значения инпута
+// document.querySelector('#text').addEventListener('focus', eventFunc); // срабатывает при клике на инпут
+// document.querySelector('#text').addEventListener('blur', eventFunc); // срабатывает при клике вне инпут
+
+// // Input range имеет только событие change
+// document.querySelector('#range').addEventListener('change', eventFunc); // срабатывает при изменении
+
+// // Выведем его значение
+// let eventFunc = function (event) {
+//     console.log(event.type);
+//     console.log(event.target.value); // значение 
+// };
+
+// // Кнопки
+// document.querySelector('#text').addEventListener('keyup', eventFunc); // нажатие кнопки(не мышки) все кнопки
+// document.querySelector('#text').addEventListener('keydown', eventFunc); // отжатие кнопки(не мышки) все кнопки
+
+
+// // События загрузки документа
+
+// // DOMContentLosded
+// document.addEventListener('DOMContentLosded', function () {
+//     'use strict';
+
+//     let eventFunc = function (event) {
+//         console.log(event.type);
+//         console.log(event.target.value);
+//     };
+
+//     document.querySelector('#text').addEventListener('keyup', eventFunc);
+// });
+// // Дождется загрузки всей страницы и сработает скрипт!
+// // используется редко и может задерживать загрузку
+
+
+// // Событие перед уходом со страници(окно напоминание об сохранении данных на пример) onbeforeunload
+
+// window.onbeforeunload = function () {
+//     return 'Вы уверены что хотите уйти со страницы?'
+// };
+// // некоторые браузеры перелавливают сообщение и выводят свое
+
+
+
+// ///////
+// // СОБЫТИЕ ОТМЕНЯЮЩЕЕ СТАНДАРТНОЕ ПОВЕДЕНИЕ БРАУЗЕРА!!!
+
+// // preventDefault
+
+// // на пример переход по ссылке
+// // на пример при нажатии кнопки отменять оправку формы
+// // на пример пока не выполнит что то(заполнил форму)
+// // на пример хотим при нажатии на ссылку выполнить свои действия
+
+// // отмена перехода по ссылке
+// document.querySelector('#link').addEventListener('click', function (event)) {
+
+//     event.preventDefault(); // отменили переход по данной ссылке
+//     console.log('сколько кликов');
+// };
+
+// // Можно отменять всплытие подсказок(вспомогательное меню) при нажатиии правой кнопки мыши
+
+// document.addEventListener('contextmenu', function (event)) {
+
+//     event.preventDefault(); // отменили всплытие меню правой мыши
+
+// };
+
+
+
+// //////
+// //////ВСПЛЫТИЕ И ЗАХВАТ СОБЫТИЙ
+// // Дано: кнопка\круг\квадрат\боди все одно в другом
+// let clickElem = null;
+
+// function greenHundler(event) {
+
+//     if (clickElem) {
+//         clickElem.classList.remove('green'); // удаляем элемент если он не фолс(существует)
+//     }
+
+//     clickElem = event.currentTarget; // присваиваим новый элемент
+//     clickElem.classList.add('green')
+// };
+
+// //каждому из этих элементов по клику добавится класс green если его нет
+// document.querySelector('.event_btn').addEventListener('click', greenHundler);
+// document.querySelector('.circle').addEventListener('click', greenHundler);
+// document.querySelector('.square').addEventListener('click', greenHundler);
+// document.querySelector('.body').addEventListener('click', greenHundler);
+// // в данном случае поменятся цвет боди тк все элементы находятся в боди
+// // через дебагер если его поставить перед вызовами то по шагам мы увидим как с каждым шагом меняется цвет у всех элементов
+// // а не видим цвета у других тк функция их принудительно уберает и бади последний шаг и на нем остается
+// // если убрать remove('green')то при нажатии покрасятся все элементы сразу
+
+
+// // Что бы посмотреть как работает захват нужно добавить третим параметром true в вызове
+// document.querySelector('.event_btn').addEventListener('click', greenHundler, true);
+// document.querySelector('.circle').addEventListener('click', greenHundler, true);
+// document.querySelector('.square').addEventListener('click', greenHundler, true);
+// document.querySelector('.body').addEventListener('click', greenHundler, true);
+
+// /////////////////////////////////////////////////////////
+
+
+
+
+// ////////////////////////////////////////////////////////////////////////
+// /////////////////////////Урок 12////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////
+
+// // контекст вызова this
+
+// // this -- ссылка на кокойто объект
+// // всегда вызывается и находится в нутри функции
+
+// // call site -- место вызова функции
+// // call steck -- порядок вызова и обратный порядок завершения
+
+
+// // четыре правила this 
+// // 1) привязка по умолчанию foo();
+// // 2) не явная привязка obj.foo();
+// // 3) явная привязка apply, call, bind
+// // 4) привязка new
+
+// // 1e 
+// // привязка по умолчанию обычный вызов
+// var a = 10;
+
+// function test() {
+//     // console.log('Hello', this); // в таком случае this смотрит на глобальный объект(виндов)
+//     console.log('Hello', this.a); /// смотрит на а(обращаемся через this  к а)
+
+// };
+// test();
+
+// // ВСЕГДА когда вызов без точки(без привязки к объекту) this смотрит на виндов
+
+
+// // 2е правило
+// // не явная привязка
+// // когда привязываем объект и его метод
+
+// let obj = {
+//     x: 10,
+//     y: 15,
+//     // test: function () {
+//     //     console.log(this);
+//     // }
+//     test: newTest
+// };
+
+// //можно и так вывод будет тот же
+// function newTest() {
+//     console.log(this);
+// };
+
+// obj.test();
+
+// // а если вызовим так то глоб обдж будет виндов
+// newTest();
+
+// // можно обратится к свойству объекта
+// function newTest() {
+//     console.log(this.x); // 10
+// };
+
+// obj.test();
+
+// /// по сложнее пример
+// let obj2 = {
+//     x: 20,
+//     y: 25,
+//     testObj: obj
+// };
+
+// obj.test();
+// obj2.testObj.test();
+
+
+// // 3) явная привязка apply, call, bind
+// let obj = {
+//     x: 10,
+//     y: 25,
+// };
+
+// function newTest() {
+//     console.log(this);
+// };
+
+// newTest.apply(obj); // первый параметр объект привязки(на который будет ссылаться зыз) принимает мвссив
+// newTest.call(obj); // первый параметр объект привязки(на который будет ссылаться зыз) принимет сколько угодно параметров через ,
+
+// // Жесткая привязка
+// function hardBing() {
+//     newTest.call(obj);
+// };
+// hardBing();
+
+// let foo = newTest.bind(obj); // передали объект кот привязан к newTest
+
+// foo(); // получим объект
+
+
+
+///////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+//////////урок 13дцатый//////////////////////////////////
+///////////////////////////////////////////////////////////
+
+// localStorage -- сохраняет на нужное время
+
+const inputText = document.getElementById('myText'),
+    myBtn = document.getElementById('myBtn'),
+    text = document.getElementById('text');
+
+// добавляем данные в локалСторедж
+// myBtn.addEventListener('click', () => {
+//     // myText--поля ввода(инпут)
+//     localStorage.myText = inputText.value;
+//     inputText.value = '';
+
+//     showText();
+// });
+// // выводим из локал данные на страницу
+// const showText = () => {
+//     text.textContent = localStorage.myText;
+// };
+
+// если буду запускать ф-цию за приделами скрипта то будет доставаться текс записанный в локал
+// showText();
+
+
+// sessionStorage -- сохраняет на время сессии
+
+// myBtn.addEventListener('click', () => {
+//     // myText--поля ввода(инпут)
+//     sessionStorage.myText = inputText.value;
+//     inputText.value = '';
+
+//     showText();
+// });
+// // выводим из локал данные на страницу
+// const showText = () => {
+//     text.textContent = sessionStorage.myText;
+// };
+
+/////////////
+// Методы для получения и записи значений
+
+// .setItem() --метод добавления
+// передаем два параметра "ключь" и  значение;
+
+// .getItem() -- метод извлечения
+
+
+// myBtn.addEventListener('click', () => {
+//     // добавляем значение
+//     localStorage.setItem('memory', inputText.value);
+//     inputText.value = '';
+
+//     showText();
+// });
+// // выводим из локал данные на страницу
+// const showText = () => {
+//     text.textContent = localStorage.getItem('memory');
+// };
+
+//метод удаления данных с локал
+// .removeItem('ключь');
+// можно также удалить в ручную через корсоль знак круг с полоской
+
+
+// myBtn.addEventListener('click', () => {
+//     // добавляем значение
+//     localStorage.setItem('memory', inputText.value);
+//     inputText.value = '';
+
+//     showText();
+// });
+// // выводим из локал данные на страницу
+// const showText = () => {
+//     text.textContent = localStorage.getItem('memory');
+// };
+
+// localStorage.removeItem('myText');
+
+
+/////////////////////////////////
+// cookies -- работает только через СЕРВЕР
+//  при открытие файла по путю не сработает куки
+// cookies -- по умолчанию сохраняют данные до конца сессии
+
+
+// document.cookie = 'имя ключа=значение';
+document.cookie = 'имя=значение';
+
+// куки сохраняет одно значение за раз 
+// что бы сохранить несколько надо так
+// куки не создается с одинаковым ключем 
+
+document.cookie = 'имя2=значение2';
+document.cookie = 'имя3=значение3';
+document.cookie = 'имя4=значение4';
+
+// получение куки
+console.log(document.cookie);
+// что бы получить отдельно нужно разьить на массив
+// document.cookie.split('; ');
+console.log(document.cookie.split('; '));
+console.log(document.cookie.split('; ')[1]);
+
+
+/////////////////////////////
+// Заставим куки жить долго!
+// expires -- прописываем когда удалить куки
+document.cookie = 'hope=life; expires=Tue, 7 May 2024 00:00:00 GMT';
+
+///////////
+// функция создания и добавления куки
+
+function setCookie(key, value, year, month, day, path, domain, secure) {
+    let cookieStr = key + '=' + value; //encodeURI(value) -- закодировали
+    if (year) {
+        const expires = new Date(year, month - 1, day);
+        cookieStr += '; expires=' + expires.toGMTString();
     }
-    count++;
-    console.log('вы кликнули на квадрат');
-};
-// костыль полсле 3х кликов счет остановится но будет отрабатывать Упс
 
-// Как можно сделать без костылей
-square.onclick = function () {
-    if (count === 3) {
-        console.log('Упс')
-        square.onclick = null; // остановит клик полсе 3х
-        return;
-    }
-    count++;
-    console.log('вы кликнули на квадрат');
+    cookieStr += path ? '; path=' + path : '';
+    cookieStr += domain ? '; domain=' + domain : '';
+    cookieStr += secure ? '; secure' : '';
+
+    document.cookie = cookieStr;
 };
 
-// Запускаем 2 функции по одному клику
-square.onclick = function () {
-    console.log('Вторая функция');
-};
-// отработает только вторая тк перезаписалась
-
-// Исправляем добавляем addEventListener навешивание слушателя
-// принимает три параметра 2 из которых обязательные
-// первый параметр событие(только уже без on)/действие 
-// второй параметр функция кот обрабатывает событие
-
-square.addEventListener('click', function () {
-    console.log('клик клик клик');
-});
-
-// вешаем несколько событий
-square.addEventListener('click', function () {
-    console.log('клик клик клик');
-});
-square.addEventListener('click', function () {
-    console.log('клак клак клак');
-});
-square.addEventListener('click', function () {
-    console.log('клиииик клиииик клиииик');
-});
-// они все 3 срабатывают по клику
-
-
-// Ограничение кликов
-// используем removeEventListener только с именной функцией
-
-// создаем именную 
-let clicked = function () {
-    console.log('клиииик клиииик клиииик');
-};
-
-// потом просто передаем вторым параметром имя функции
-let clicked = function () {
-    count++;
-    if (count === 3) square.removeEventListener('click', clicked); //отанавливаем обработчик
-    console.log('клиииик клиииик клиииик');
-};
-
-square.addEventListener('click', clicked); // вызов
-
-// У каждого события есть объект события который доступен только функции обработчику события что бы его получить и получить все его свойства нужно добавить event или просто e
-
-let square = document.querySelector('.square');
-
-let eventFunc = function (event) {
-    console.log(event);
-};
-
-square.addEventListener('click', eventFunc); // клик
-// повесим еще несколько событий
-square.addEventListener('mouseup', eventFunc); // клик отжат
-square.addEventListener('mousedown', eventFunc); // клик нажат
-square.addEventListener('mousemove', eventFunc); // движение мыши по объекту
-square.addEventListener('mouseenter', eventFunc); // заводим мышку на объект
-square.addEventListener('mouseleave', eventFunc); // покидаем объект
-square.addEventListener('mouseover', eventFunc); // заводим мышку на объект
-square.addEventListener('mouseout', eventFunc); //покидаем объект
-
-// различия между mouseenter/mouseover mouseleave/mouseout
-
-// mouseover\mouseout если есть объект в оюъекте(круг в квадрате)
-//  то при преходе с одного на другой сработает вход\выход
-// то есть событие срабатывает даже на детей
-
-// mouseenter / mouseleave в этих случаях события по детям не отрабатываются
-
-
-// СОБЫТИЯ ДЛЯ РАБОТЫ С ФОРМАМИ
-
-// получаем инпут по айди получаем изменения(value) в инпуте
-let eventFunc = function (event) {
-    console.log(event.type);
-};
-
-document.querySelector('#text').addEventListener('input', eventFunc); // input событие в консоле будет инпут и колво знаков
-document.querySelector('#text').addEventListener('change', eventFunc); // будет срабатывать при смене фокуса и при изменении значения инпута
-document.querySelector('#text').addEventListener('focus', eventFunc); // срабатывает при клике на инпут
-document.querySelector('#text').addEventListener('blur', eventFunc); // срабатывает при клике вне инпут
-
-// Input range имеет только событие change
-document.querySelector('#range').addEventListener('change', eventFunc); // срабатывает при изменении
-
-// Выведем его значение
-let eventFunc = function (event) {
-    console.log(event.type);
-    console.log(event.target.value); // значение 
-};
-
-// Кнопки
-document.querySelector('#text').addEventListener('keyup', eventFunc); // нажатие кнопки(не мышки) все кнопки
-document.querySelector('#text').addEventListener('keydown', eventFunc); // отжатие кнопки(не мышки) все кнопки
-
-
-// События загрузки документа
-
-// DOMContentLosded
-document.addEventListener('DOMContentLosded', function () {
-    'use strict';
-
-    let eventFunc = function (event) {
-        console.log(event.type);
-        console.log(event.target.value);
-    };
-
-    document.querySelector('#text').addEventListener('keyup', eventFunc);
-});
-// Дождется загрузки всей страницы и сработает скрипт!
-// используется редко и может задерживать загрузку
-
-
-// Событие перед уходом со страници(окно напоминание об сохранении данных на пример) onbeforeunload
-
-window.onbeforeunload = function () {
-    return 'Вы уверены что хотите уйти со страницы?'
-};
-// некоторые браузеры перелавливают сообщение и выводят свое
-
-
-
-///////
-// СОБЫТИЕ ОТМЕНЯЮЩЕЕ СТАНДАРТНОЕ ПОВЕДЕНИЕ БРАУЗЕРА!!!
-
-// preventDefault
-
-// на пример переход по ссылке
-// на пример при нажатии кнопки отменять оправку формы
-// на пример пока не выполнит что то(заполнил форму)
-// на пример хотим при нажатии на ссылку выполнить свои действия
-
-// отмена перехода по ссылке
-document.querySelector('#link').addEventListener('click', function (event)) {
-
-    event.preventDefault(); // отменили переход по данной ссылке
-    console.log('сколько кликов');
-};
-
-// Можно отменять всплытие подсказок(вспомогательное меню) при нажатиии правой кнопки мыши
-
-document.addEventListener('contextmenu', function (event)) {
-
-    event.preventDefault(); // отменили всплытие меню правой мыши
-
-};
-
-
-
-//////
-//////ВСПЛЫТИЕ И ЗАХВАТ СОБЫТИЙ
-// Дано: кнопка\круг\квадрат\боди все одно в другом
-let clickElem = null;
-
-function greenHundler(event) {
-
-    if (clickElem) {
-        clickElem.classList.remove('green'); // удаляем элемент если он не фолс(существует)
-    }
-
-    clickElem = event.currentTarget; // присваиваим новый элемент
-    clickElem.classList.add('green')
-};
-
-//каждому из этих элементов по клику добавится класс green если его нет
-document.querySelector('.event_btn').addEventListener('click', greenHundler);
-document.querySelector('.circle').addEventListener('click', greenHundler);
-document.querySelector('.square').addEventListener('click', greenHundler);
-document.querySelector('.body').addEventListener('click', greenHundler);
-// в данном случае поменятся цвет боди тк все элементы находятся в боди
-// через дебагер если его поставить перед вызовами то по шагам мы увидим как с каждым шагом меняется цвет у всех элементов
-// а не видим цвета у других тк функция их принудительно уберает и бади последний шаг и на нем остается
-// если убрать remove('green')то при нажатии покрасятся все элементы сразу
-
-
-// Что бы посмотреть как работает захват нужно добавить третим параметром true в вызове
-document.querySelector('.event_btn').addEventListener('click', greenHundler, true);
-document.querySelector('.circle').addEventListener('click', greenHundler, true);
-document.querySelector('.square').addEventListener('click', greenHundler, true);
-document.querySelector('.body').addEventListener('click', greenHundler, true);
-
-/////////////////////////////////////////////////////////
-
-
-
-
-////////////////////////////////////////////////////////////////////////
-/////////////////////////Урок 12////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-
-// контекст вызова this
-
-// this -- ссылка на кокойто объект
-// всегда вызывается и находится в нутри функции
-
-// call site -- место вызова функции
-// call steck -- порядок вызова и обратный порядок завершения
-
-
-// четыре правила this 
-// 1) привязка по умолчанию foo();
-// 2) не явная привязка obj.foo();
-// 3) явная привязка apply, call, bind
-// 4) привязка new
-
-// 1e 
-// привязка по умолчанию обычный вызов
-var a = 10;
-
-function test() {
-    // console.log('Hello', this); // в таком случае this смотрит на глобальный объект(виндов)
-    console.log('Hello', this.a); /// смотрит на а(обращаемся через this  к а)
-
-};
-test();
-
-// ВСЕГДА когда вызов без точки(без привязки к объекту) this смотрит на виндов
-
-
-// 2е правило
-// не явная привязка
-// когда привязываем объект и его метод
-
-let obj = {
-    x: 10,
-    y: 15,
-    // test: function () {
-    //     console.log(this);
-    // }
-    test: newTest
-};
-
-//можно и так вывод будет тот же
-function newTest() {
-    console.log(this);
-};
-
-obj.test();
-
-// а если вызовим так то глоб обдж будет виндов
-newTest();
-
-// можно обратится к свойству объекта
-function newTest() {
-    console.log(this.x); // 10
-};
-
-obj.test();
-
-/// по сложнее пример
-let obj2 = {
-    x: 20,
-    y: 25,
-    testObj: obj
-};
-
-obj.test();
-obj2.testObj.test();
-
-
-// 3) явная привязка apply, call, bind
-let obj = {
-    x: 10,
-    y: 25,
-};
-
-function newTest() {
-    console.log(this);
-};
-
-newTest.apply(obj); // первый параметр объект привязки(на который будет ссылаться зыз) принимает мвссив
-newTest.call(obj); // первый параметр объект привязки(на который будет ссылаться зыз) принимет сколько угодно параметров через ,
-
-// Жесткая привязка
-function hardBing() {
-    newTest.call(obj);
-};
-hardBing();
-
-let foo = newTest.bind(obj); // передали объект кот привязан к newTest
-
-foo(); // получим объект
-
-. /
+// создаем!
+setCookie('Привет', 'Мир');
+
+// куки посложнее
+// setCookie('Любимый праздник детей', 'Новый год', 2020, 1, 1);
+console.log(document.cookie);
+// console.log(decodeURI(document.cookie)); //раскодировали
+//
