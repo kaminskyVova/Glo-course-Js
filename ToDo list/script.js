@@ -8,6 +8,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const todoList = document.getElementById('todo');
   const completedList = document.getElementById('completed');
   const headerInput = document.querySelector('.header-input');
+  //
+  const btnPlus = document.getElementById('add');
+  // вешаем создание элемента на кнопку +
+  btnPlus.addEventListener('click', function () {
+    if (!renderItem) {
+      renderItem;
+    }
+  });
 
 
   //создаем объект в кот получаем списки
@@ -169,7 +177,6 @@ document.addEventListener('DOMContentLoaded', function () {
       itemComplete(event.target);
     });
 
-
     //помещаем собранный блок первым на страницу
     list.insertBefore(item, list.childNodes[0]);
   };
@@ -189,3 +196,10 @@ document.addEventListener('DOMContentLoaded', function () {
   renderItemForUpdate();
 
 });
+
+
+
+
+///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
