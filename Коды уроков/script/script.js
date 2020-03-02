@@ -1556,9 +1556,9 @@
 
 // localStorage -- сохраняет на нужное время
 
-const inputText = document.getElementById('myText'),
-    myBtn = document.getElementById('myBtn'),
-    text = document.getElementById('text');
+// const inputText = document.getElementById('myText'),
+//     myBtn = document.getElementById('myBtn'),
+//     text = document.getElementById('text');
 
 // добавляем данные в локалСторедж
 // myBtn.addEventListener('click', () => {
@@ -1638,52 +1638,536 @@ const inputText = document.getElementById('myText'),
 // cookies -- по умолчанию сохраняют данные до конца сессии
 
 
-// document.cookie = 'имя ключа=значение';
-document.cookie = 'имя=значение';
+// // document.cookie = 'имя ключа=значение';
+// document.cookie = 'имя=значение';
 
-// куки сохраняет одно значение за раз 
-// что бы сохранить несколько надо так
-// куки не создается с одинаковым ключем 
+// // куки сохраняет одно значение за раз 
+// // что бы сохранить несколько надо так
+// // куки не создается с одинаковым ключем 
 
-document.cookie = 'имя2=значение2';
-document.cookie = 'имя3=значение3';
-document.cookie = 'имя4=значение4';
+// document.cookie = 'имя2=значение2';
+// document.cookie = 'имя3=значение3';
+// document.cookie = 'имя4=значение4';
 
-// получение куки
-console.log(document.cookie);
-// что бы получить отдельно нужно разьить на массив
-// document.cookie.split('; ');
-console.log(document.cookie.split('; '));
-console.log(document.cookie.split('; ')[1]);
+// // получение куки
+// console.log(document.cookie);
+// // что бы получить отдельно нужно разьить на массив
+// // document.cookie.split('; ');
+// console.log(document.cookie.split('; '));
+// console.log(document.cookie.split('; ')[1]);
 
 
 /////////////////////////////
 // Заставим куки жить долго!
 // expires -- прописываем когда удалить куки
-document.cookie = 'hope=life; expires=Tue, 7 May 2024 00:00:00 GMT';
+// document.cookie = 'hope=life; expires=Tue, 7 May 2024 00:00:00 GMT';
 
 ///////////
 // функция создания и добавления куки
 
-function setCookie(key, value, year, month, day, path, domain, secure) {
-    let cookieStr = key + '=' + value; //encodeURI(value) -- закодировали
-    if (year) {
-        const expires = new Date(year, month - 1, day);
-        cookieStr += '; expires=' + expires.toGMTString();
-    }
+// function setCookie(key, value, year, month, day, path, domain, secure) {
+//     let cookieStr = key + '=' + value; //encodeURI(value) -- закодировали
+//     if (year) {
+//         const expires = new Date(year, month - 1, day);
+//         cookieStr += '; expires=' + expires.toGMTString();
+//     }
 
-    cookieStr += path ? '; path=' + path : '';
-    cookieStr += domain ? '; domain=' + domain : '';
-    cookieStr += secure ? '; secure' : '';
+//     cookieStr += path ? '; path=' + path : '';
+//     cookieStr += domain ? '; domain=' + domain : '';
+//     cookieStr += secure ? '; secure' : '';
 
-    document.cookie = cookieStr;
+//     document.cookie = cookieStr;
+// };
+
+// // создаем!
+// setCookie('Привет', 'Мир');
+
+// // куки посложнее
+// // setCookie('Любимый праздник детей', 'Новый год', 2020, 1, 1);
+// console.log(document.cookie);
+// // console.log(decodeURI(document.cookie)); //раскодировали
+// //
+
+
+///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+/////////////////// 14й урок//////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+// ООП
+
+// Prototype -- скрытая ссылка объекта
+// Prototype -- это объект из которого текущий объект черпает недостающие свойства
+// если в объекте не хватает свойства то поднимается по прототипу и берет нужное
+// главный объект не знает сколько у него потомков -- запрос с низу вверх
+
+
+
+// let arr = [1, 2, 3, 4, 5];
+// console.log(arr.__proto__);
+// console.log(Array.prototype);
+
+// let car = {
+//     doors: 4,
+//     turbocharging: false,
+//     ride: () => {
+//         console.log('Машина едет');
+//     }
+// };
+// // car.ride();
+
+// // создадим новый объект на основе car 
+// let newCar = Object.create(car);
+
+
+// newCar.model = 'mazda 3';
+// console.log(newCar);
+// console.log(newCar.doors);
+
+// метод hesOwnProperty проверяет есть ли такое свойство возвращает true or false
+// не видет наследуемые свойства
+// console.log(newCar.hasOwnProperty('model'));
+
+// // что бы проверить есть ли у кого то такое свойство(наследуемое) пишем
+// console.log(newCar.__proto__.hasOwnProperty('doors'));
+
+// // метод isPrototypeOf -- показывает является данный объект прототипом
+// console.log(car.isPrototypeOf(newCar));
+
+/////////////////////////////////////
+/////////Конструкторы///////////
+
+// конструктор -- функция для описания какой то сущности
+
+// function Car() {
+//     boors: 4,
+//     this.model = 'mazda',
+//     this.doors = 4
+
+// };
+
+// // последующие объекты создаются через оператор new
+// // this будет указывать на car1 
+// // если в новом объекте нет свойства то оно будет присвоенно через this 
+// // let car1 = new Car();
+// // console.log(car1);
+
+// // создадим новое свойство
+// Car.prototype.ride = function () {
+//     console.log('Gogogo');
+// };
+// // car1.ride();
+
+// function Car(model, color) {
+//     this.model = model,
+//         this.color = color;
+// };
+
+// let car1 = new Car('Mazda', 'Red');
+// console.log(car1);
+// let car2 = new Car('Vaz', 'black');
+// console.log(car1.ride === car2.ride);
+
+
+////////////////////////////////////////////
+//////////Классы в JS/////////////
+//////////
+
+// Класс -- обстрактная единица описывающая объект 
+// Каждый объект должен быть создан на основе класса который его декларирует
+
+// Класс
+// есть объект класс которого на самом деле не существует тк описанно все обстрактно
+// function Car(brand, model, options) {
+//     this.brand = brand;
+//     this.model = model;
+//     options = options || {}; // будут передаваться целым объектом
+//     this.color = options.color;
+//     this.transmisson = options.transmisson;
+// };
+
+// Car.prototype.ride = function () {
+//     console.log(this.brand + ' ' + this.model + ' поехала!');
+// }; //
+
+
+// // на основе класса создадим объекты
+// let car1 = new Car('Mazda', '3', {
+//     color: 'blue'
+// });
+// let car2 = new Car('BMW', 'X3', {
+//     ABS: true
+// }); // ABS -- undef
+
+// console.log(car1);
+// console.log(car2);
+// car1.ride();
+// car2.ride();
+// // проверим является ли Car прототипом для car1
+// console.log(Car.prototype.isPrototypeOf(car1));
+
+// // оператор instanceof 
+// console.log(car2 instanceof Car);
+
+
+
+//////////////////////////////////////////////////////////////////////
+//////////////////урок 15//////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+// Особенности современного стандарта ES6 
+// Интерполяция. Стрелочные функции
+
+// // переменные заключенные в {}видны только в этой области
+// // const нельзя преопределить (константа)
+// // но в нутри const [1, 2, 3]переопредилять и заменять можно
+// const arr = [1, 2, 3];
+// arr.push(4);
+// console.log(arr);
+// // так же косается и объектов перезаписать нельзя но изменить свойстрва можно
+// const agent = {
+//     firstName: 'Jon',
+//     lastNamne: 'Weck',
+//     age: 46
+// };
+
+// agent.artist = 'Keanu Reeves';
+// agent.firstName = 'Johnny';
+// console.log(agent);
+
+// // получение переменных со  страници нужно объявлять через const 
+// // так же функции объекты и массивы
+
+
+// // Шаблонные строки ``
+// // const str = "Двойные кавычки";
+// // const str1 = 'Одинарные кавычки';
+
+// const newStr = `Обратные 
+// кавычки`;
+// console.log(newStr);
+
+// // ${} в место плюса
+// const name = 'Alex',
+//     age = 30;
+
+// // const fulName = `${name} ${age}`;
+// const fulName = `${name} ${age + 1}`;
+// console.log(fulName);
+
+// // параметры по умолчанию
+
+// const createHome = function (wall = 3, doors = 1, window = 5) {
+//     console.log(`Дом имеет:
+// стен: ${wall},
+// дверей: ${doors},
+// окон: ${window}`)
+// };
+
+// createHome();
+// // createHome(4, 6, 10);
+
+
+// /////////////
+// // Стрелочные функции
+
+// // const sum = (a, b) => {
+// //     return a + b;
+// // };
+
+// // console.log(sum(2, 10));
+
+// // если функция должна вернуть разовое значение то можно и так:
+// const sum = (a, b) => a + b;
+// console.log(sum(10, 10));
+
+// // если передаем один параметр то можно и так
+// const sum2 = a => a + 3;
+// console.log(sum2(10));
+
+// // если хотим передать объект через стрелочную функцию то ее надо заключить в ()
+// const sum3 = (a, b) => ({
+//     a: a,
+//     b: b,
+//     sum: a + b
+// });
+// console.log(sum3(10, 20));
+
+
+// // можно использовать в обработчике событий
+// // const btn = document.querySelector('button');
+// // btn.addEventListener('cmick', () => {
+// //     console.log('hello');
+// // });
+
+// // btn.addEventListener('cmick', (e) => {
+// //     console.log(e.target); // будем получать по клику кнопку(цель)
+// // });
+
+// // много кнопак перебор
+// // const btn = document.querySelectorAll('button');
+// // btn.addEventListener('cmick', (e) => {
+// //     btn.forEach((e) => {
+// //         console.log(e); //получим все кнопки
+// //     });
+// // });
+
+// // 25.52 this там где не прошло но getExpenses не переводить!
+
+// // так как у стрелочной функции нет this то this будет та функция в которой объявленна стрелочная
+
+
+// // следует использовать стрелки везде где нет контекста вызова!!!
+// //////////////////////////////////////////////////////////////////////
+// // тут не прокатит
+// const Human = function (firstName, lastNamne, age) {
+//     this.firstName = firstName;
+//     this.lastNamne = lastNamne;
+//     this.age = age;
+// };
+
+// const newHuman = new Human('John', 'Wick', 46);
+// console.log(newHuman);
+
+
+
+// //////////////////////////////////////////////////////////
+// // defineProperty, Геттеры, Сеттеры
+
+// // раньше было так 
+// const mazda = {
+//     model: 3,
+//     year: 2006
+// };
+
+// mazda.color = 'blue';
+// // mazda['color'] = 'blue'; //так тож можно
+// // console.log(mazda);
+
+// // defineProperty -- объявляет свойства объекта и настраивает поведенчиские свойства
+// Object.defineProperty(mazda, 'color', {
+//     //свойство
+//     value: 'blue',
+//     //атрибуты
+//     writable: true, //разрешает или запрещает присвяевать свойства
+//     configurable: true, //разрешвет запрещает удаление свойств
+//     enumerable: true // разрешвет запрещает видеть свойство во время перебора цикла
+// });
+// console.log(mazda);
+
+// // можно приметить к отдельному свойству
+// Object.defineProperty(mazda, 'year', {
+
+//     writable: false,
+//     configurable: true,
+//     enumerable: false
+// });
+// console.log(mazda);
+
+
+// // геттеры и сеттеры
+// // const car = {
+// //     brand: 'mazda',
+// //     model: 3,
+// //     year: 2006
+// // };
+// // car.color = 'blue';
+
+// // Object.defineProperty(car, 'fullTitle', {
+// //     //геттер(отдает значение) --  самовызывающийся метод оно же свойство
+// //     get: function () {
+// //         return this.brand + ' ' + this.model;
+// //     },
+// //     // сеттер(задает значение) -- 
+// //     set: function (val) {
+// //         this.brand = val;
+// //     }
+// // });
+// // car.fullTitle = 'BMW';
+// // console.log(car.fullTitle);
+
+// //Es6 get set
+
+// // const car = {
+// //     brand: 'mazda',
+// //     model: 3,
+// //     year: 2006,
+// //     get fullTitle() {
+// //         return this.brand + ' ' + this.model;
+// //     },
+
+// //     set fullTitle(val) {
+// //         this.brand = val;
+// //     }
+// // };
+// // car.fullTitle = 'BMW';
+// // console.log(car.fullTitle);
+
+
+// /////////////////////////////////////////////////
+// //////Классы ES6
+
+// // class Car {
+// //     constructor() {
+// //         this.brand = 'mazda';
+// //     }
+// // };
+// // const car1 = new Car();
+// // console.log(car1);
+
+// // можно и так предавать
+// class CarWash {
+//     constructor(brand, model = CarWash.noCarBaseModel(), services = []) {
+//         this.brand = brand;
+//         this.model = model;
+//         this.washed = false;
+//         // добавим гетеры сеттеры
+//         // this.services = services;
+//         // для сокрытия переменной из вне добавим _(инкапсуляция) что бы кто то ни начудил скрыли доступ
+//         // а что бы влиять есть гетеры и сетеры
+//         // если не добавлять инкапсуляцию то просто перезатрем
+//         this._services = services
+//     }
+
+//     // статический метод нельзя вызвать из вне объекта(car4.noCarBaseModel())
+//     static noCarBaseModel() {
+//         return 'none';
+//     }
+
+//     // добавим метод (только после конструктора)
+//     washReady() {
+//         this.washed = true;
+//         CarWash.counter++; // количество помытых авто(так добавляем)
+//         this.report();
+//     }
+//     report() {
+//         console.log(this.brand, this.model, this.washed);
+//     }
+//     // добавим гетеры 
+//     get services() {
+//         console.log(this._services);
+//         return this._services.length > 0 ? 'Есть доп услуги' : 'Доп услуг нет';
+//         // если есть услуги (длинна строки больше 0 то вывести "" а если нет то вывести "")
+//     }
+
+//     //добавим сетеры
+//     set services(addServices) {
+//         return this._services.push(addServices);
+//     }
+// };
+
+// // статические методы класса(так же нельзя вызвать из вне car1.counter())
+// CarWash.counter = 0; // количество помытых авто(так создаем)
+
+// //////////////////////////////////
+// // const car1 = new CarWash('mazda', 3);
+// // car1.report();
+// // console.log(car1);
+
+// console.log(CarWash.counter); //0
+// // car1.washReady();
+// console.log(CarWash.counter); //1
+// // car1.washReady();
+// console.log(CarWash.counter); //2
+// const car2 = new CarWash('BMW', 5);
+// const car3 = new CarWash('Volvo', 120);
+// car2.washReady();
+// car3.washReady();
+// const car4 = new CarWash('ZAZ');
+// car4.washReady();
+// console.log(CarWash.counter);
+
+
+// //добавим мазде новые свойства(гетеры сетеры)
+// let car1 = new CarWash('mazda', 3, ['black tires', 'wax']);
+// // выводим гетер
+// console.log(car1.services);
+// console.log(car2.services);
+// //добавим сетер
+// car1.services = 'Протирка стекол';
+
+
+// //////////////////////////////////////
+// // Наследование: открываем вторую мойку
+// // extends -- указывает от кого наследуем
+
+// class PassCar extends CarWash {
+//     // принял все свойства первой мойки
+//     //////
+//     // создадим конструктор у наследуемого класса
+//     // super -- ключеове слово
+//     constructor(brand, model, services, pass = 5) {
+//         super(brand, model, services); // унаследовали именно эти свойства
+//         // добавим свои новые
+//         this.pass = pass; // пасажир места
+//     }
+//     // так же можно создавать и изменять методы
+//     washReady() {
+//         // this.washed = true;
+//         // CarWash.counter++;
+//         // this.report();
+//         super.washReady();
+//         this.reportOffice();
+//         // что бы не писать все заново можно так
+
+//     }
+
+//     reportOffice() {
+//         console.log('На мойке для легковых была помыта машина');
+//     }
+// };
+
+
+// const car5 = new PassCar('Жигуль', 'копейка', 'services');
+// console.log(car5);
+// console.log(car5.services);
+// car5.washReady();
+// console.log(car1);
+// console.log(car5);
+// car5.washReady();
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////урок 16/////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Rest, spread, Деструктуризация
+
+// Rest параметр
+
+// раньше было так
+function test() {
+    console.log(arguments); // получили псевдомассив с преданными параметрами
+    // а если хотели наст массив то надо было писать так
+    const arg = Array.prototype.slice.call(arguments);
+    console.log(arg);
+}
+test('red', 5, 12, 'black', [], true, 9);
+
+// теперь так 
+function test2(...arr) { //... rest параметр
+    console.log(arr);
 };
+test2('red', 5, 12, 'black', [], true, 9); // если не передать аргументы то получим просто пустой массив
 
-// создаем!
-setCookie('Привет', 'Мир');
 
-// куки посложнее
-// setCookie('Любимый праздник детей', 'Новый год', 2020, 1, 1);
-console.log(document.cookie);
-// console.log(decodeURI(document.cookie)); //раскодировали
-//
+// если на пример передаем не все параметры то не переданые тоже запишутся в массив
+
+function test3(a, b, c, ...arr) { // ... rest парметр всегда идет последним
+    console.log(a, b, c);
+    console.log(arr);
+};
+test3('red', 5, 12, 'black', [], true, 9);
+
+/////////////////
+// spread -- оператор
+// раньше передавали параметры в массив так
+const arr = ['red', 5, 12];
+
+function test5(a, b, c) {
+    console.log(a, b, c);
+}
