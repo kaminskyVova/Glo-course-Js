@@ -245,9 +245,11 @@ AppData.prototype.addIncomeBlock = function () {
   // добавляем поля при нажатии плюса доп доходы
   let cloneIncomeItems = incomeItems[0].cloneNode(true);
 
+  //пустые новые инпуты
   cloneIncomeItems.querySelectorAll('input').forEach(function (item) {
     item.value = '';
   });
+
   // let b = cloneIncomeItems.querySelector('.income-amount');
   cloneIncomeItems.querySelector('.income-amount').addEventListener("input", checkInputNum);
   cloneIncomeItems.querySelector('.income-title').addEventListener("input", checkInputSymol);
@@ -268,8 +270,15 @@ AppData.prototype.addIncomeBlock = function () {
 AppData.prototype.addExpensesBlock = function () {
   let expensesItems = document.querySelectorAll('.expenses-items');
 
+
   // добавляем поля при нажатии плюса обязательные расходы
+
   let cloneExpensesItems = expensesItems[0].cloneNode(true);
+
+  //пустые новые инпуты
+  cloneExpensesItems.querySelectorAll('input').forEach(function (item) {
+    item.value = '';
+  });
   cloneExpensesItems.querySelector('.expenses-amount').addEventListener("input", checkInputNum);
   cloneExpensesItems.querySelector('.expenses-title').addEventListener("input", checkInputSymol);
   expensesItems[0].parentNode.insertBefore(cloneExpensesItems, expensesPlus);
