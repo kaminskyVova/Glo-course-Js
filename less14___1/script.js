@@ -10,37 +10,35 @@ function DomElement(selector, height, width, bg, fontSize) {
 }
 
 // Метод
-DomElement.prototype.makeElem = function () {
+DomElement.prototype.makeElem = function (str) {
     let element = document.getElementsByTagName('body');
 
-    let elemText = this.selector.split();
-    console.log(this.selector);
+    // let elemText = this.selector.slice(1);
+    // console.log(elemText);
     if (this.selector[0] === '.') {
         element = document.createElement('div');
         element.classList.add('block');
-        element.textContent = '12345678';
     } else if (this.selector[0] === '#') {
         element = document.createElement('p');
         element.id = 'best';
-        element.textContent = 'sadsfgdhf';
     }
+    element.textContent = str;
 
     console.log(element);
 
     document.body.appendChild(element);
-    // const _this = this;
     element.style.cssText = `
-    background-color: red;
-    height: 100px;
-    width: 250px;
-    font-size: 14px;
+        background-color: ${this.bg};
+        height: ${this.height}px;
+        width: ${this.width}px;
+        font-size: ${this.fontSize}px;
     `;
 
-    // height: this.height;
+    // 'height: ' + this.height + ';
     // width: this.width;
     // background: this.bg;
     // font - size: this.fontSize;
-    // `;
+
 };
 
 
@@ -48,18 +46,18 @@ DomElement.prototype.makeElem = function () {
 // передаем параметры
 let DomElementOne = new DomElement(
     '.onetext',
-    '100px',
-    '200px',
+    100,
+    200,
     'red',
-    '14px'
+    14
 );
 let DomElementTwo = new DomElement(
     '#twotext',
-    '100px',
-    '200px',
+    100,
+    200,
     'yellow',
-    '14px'
+    14
 );
 
-DomElementOne.makeElem();
-DomElementTwo.makeElem();
+DomElementOne.makeElem('fgbdfgubjvrt');
+DomElementTwo.makeElem('132456450');
