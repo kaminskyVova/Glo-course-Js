@@ -38,14 +38,14 @@ const depositSelect = document.querySelector('select'), // Депозиты в �
 
 
 // доход в месяц дневной бюджет остаток
-const budgetMonthValue = document.getElementsByClassName('budget_month-value')[0], // доход за месяц
-  budgetDayValue = document.getElementsByClassName('budget_day-value')[0], //дневной бюджет
-  expensesMonthValue = document.getElementsByClassName('expenses_month-value')[0]; //расходы за месяц
+const budgetMonthValue = document.querySelectorAll('.budget_month-value')[0], // доход за месяц
+  budgetDayValue = document.querySelectorAll('.budget_day-value')[0], //дневной бюджет
+  expensesMonthValue = document.querySelectorAll('.expenses_month-value')[0]; //расходы за месяц
 
 
 // возможные расходы строка
 const additionalExpensesItem = document.querySelector('.additional_expenses-item'); //возможные расходы наим
-const additionalExpensesValue = document.getElementsByClassName('additional_expenses-value')[0]; // возможные расходы сумма
+const additionalExpensesValue = document.querySelectorAll('.additional_expenses-value')[0]; // возможные расходы сумма
 
 
 // дополнительный доход инпуты
@@ -85,7 +85,7 @@ const periodAmount = document.querySelector('.period-amount');
 /////////////////////////////////////////
 //блокировка кнопки при пустой сумме
 startBtn.disabled = true;
-salaryAmount.addEventListener('input', function () {
+salaryAmount.addEventListener('input', () => {
   if (salaryAmount.value.trim() === '') {
     startBtn.disabled = true;
   } else {
@@ -146,7 +146,7 @@ class AppData {
   start() {
     ///блокировка инпутов ввода 
     const allInputs = document.querySelector('.data').querySelectorAll('input[type="text"]');
-    allInputs.forEach(function (item) {
+    allInputs.forEach((item) => {
       item.disabled = true;
     });
 
@@ -249,11 +249,10 @@ class AppData {
   // вывод расходы
   getAddExpenses() {
     const addExpenses = additionalExpensesItem.value.split(',');
-    const _this = this;
     addExpenses.forEach((item) => {
       item = item.trim();
       if (item !== '') {
-        _this.addExpenses.push(item);
+        this.addExpenses.push(item);
       }
     });
   };
@@ -261,11 +260,10 @@ class AppData {
 
   // вывод доходы доп 
   getAddIncome() {
-    const _this = this;
     additionalIncomeItems.forEach((item) => {
       let itemValue = item.value.trim();
       if (itemValue !== '') {
-        _this.addIncome.push(itemValue);
+        this.addIncome.push(itemValue);
       }
     });
   };
@@ -278,7 +276,7 @@ class AppData {
     // добавляем поля при нажатии плюса доп доходы
     const cloneIncomeItems = incomeItems[0].cloneNode(true);
     //пустые новые инпуты
-    cloneIncomeItems.querySelectorAll('input').forEach(function (item) {
+    cloneIncomeItems.querySelectorAll('input').forEach((item) => {
       item.value = '';
     });
 
@@ -300,7 +298,7 @@ class AppData {
     // добавляем поля при нажатии плюса обязательные расходы
     const cloneExpensesItems = expensesItems[0].cloneNode(true);
     //пустые новые инпуты
-    cloneExpensesItems.querySelectorAll('input').forEach(function (item) {
+    cloneExpensesItems.querySelectorAll('input').forEach((item) => {
       item.value = '';
     });
     cloneExpensesItems.querySelector('.expenses-amount').addEventListener("input", checkInputNum);
@@ -318,12 +316,11 @@ class AppData {
   // доп доходы
   getIncomes() {
     const incomeItems = document.querySelectorAll('.income-items');
-    const _this = this;
     incomeItems.forEach((item) => {
       const itemIncomes = item.querySelector('.income-title').value;
       const cashIncomes = item.querySelector('.income-amount').value;
       if (itemIncomes !== '' && cashIncomes !== '') {
-        _this.income[itemIncomes] = cashIncomes;
+        this.income[itemIncomes] = cashIncomes;
       }
     });
 
@@ -336,12 +333,11 @@ class AppData {
   //Все обязательные расходы
   getExpenses() {
     const expensesItems = document.querySelectorAll('.expenses-items');
-    const _this = this;
     expensesItems.forEach((item) => {
       let itemExpenses = item.querySelector('.expenses-title').value;
       let cashExpenses = item.querySelector('.expenses-amount').value;
       if (itemExpenses !== '' && cashExpenses !== '') {
-        _this.expenses[itemExpenses] = cashExpenses;
+        this.expenses[itemExpenses] = cashExpenses;
       }
     });
   };
