@@ -2165,9 +2165,428 @@ test3('red', 5, 12, 'black', [], true, 9);
 
 /////////////////
 // spread -- оператор
-// раньше передавали параметры в массив так
-const arr = ['red', 5, 12];
+// раньше получали прараметры из массива так
+// const arr = ['red', 5, 12];
+// const arr2 = ['black', true];
 
-function test5(a, b, c) {
-    console.log(a, b, c);
-}
+// function test5(a, b, c, d, e) {
+//     console.log(a, b, c);
+//     console.log(d, e);
+
+// }
+
+// test5(arr[0], arr[1], arr[2], arr2[0], arr2[1]);
+
+// // сейчас получаем так
+// test5(...arr, ...arr2);
+
+// При помощи spread можно собрать из нескольких массивов один
+const arr = ['red', 5, 12];
+const arr2 = ['black', true];
+
+// const arr3 = [...arr, ...arr2];
+// console.log(arr3);
+
+// так же можно комбенировать с доп параметрами
+const arr3 = [1, ...arr, 55, ...arr2];
+console.log(arr3);
+
+// так же можно преобразовать ДОМ коллекцию в массив
+// есть 5 картинок
+// const allImg = document.querySelectorAll('img');
+// console.log(allImg); // nodelist
+// const newImg = [...allimg];
+// console.log(newImg); // массив
+
+
+//////
+// Деструктиризация объекта
+const car = {
+    brand: 'Mazda',
+    model: 3,
+    color: 'red',
+    options: {
+        abs: true,
+        doors: 4
+    }
+};
+
+// раньше присваивали свойства в переменную так
+// const brand = car.brand;
+// console.log(brand);
+
+// сейчас так
+const {
+    brand,
+    color,
+    model
+} = car;
+
+console.log(brand, model, color);
+const {
+    options: {
+        abs,
+        doors
+    }
+} = car;
+console.log(doors, abs);
+
+// поместим свойства в переменные
+const {
+    options: {
+        doors: carDoors,
+        abs: carAbs
+    }
+} = car;
+console.log(carDoors, carAbs);
+
+// если мы не знвем есть ли свойство то можем задать по умолчанию
+const {
+    // turbo,
+    turbo = true
+} = car;
+console.log(turbo);
+// не получится со вложенными свойствами options: { color = 'red'}
+
+// но есть способ!
+const {
+    sumOptions: {
+        color2 = 'red'
+    } = {}
+} = car;
+console.log(color2);
+
+
+// ПРИМЕНЕНИЕ! есть ф-ция кот принимает объект
+// const createCar = (car) => {
+//     console.log(`Запущено производство автомобиля ${car.brand} ${car.model}
+//     цвет кузова: ${car.color}
+//     цвет салона: ${car.colorInt}`);
+// };
+// // передаем объект
+// // нужно передавать Все свойства
+// createCar({
+//     brand: 'Mazda',
+//     model: 3,
+//     color: 'blue',
+//     colorInt: 'black'
+// });
+
+// можно так же деструкторизировать для того что бы задать праметры по умолчанию
+const createCar = ({
+    brand = 'BMW',
+    model = 'x3',
+    color = 'white',
+    colorInt = 'yellow'
+}) => {
+    console.log(`Запущено производство автомобиля ${brand} ${model}
+    цвет кузова: ${color}
+    цвет салона: ${colorInt}`);
+};
+// передаем объект
+// нужно передавать Все свойства
+createCar({
+    brand: 'Mazda',
+    model: 3,
+    color: 'blue', // если не предать то будут те что по умолч
+    colorInt: 'black'
+});
+
+//даже если передать пустой объект то все будет оке
+// передадуться праметры по умолч
+createCar({});
+
+// так же можно использовать рест параметры
+const {
+    ...options
+} = car;
+console.log(options);
+
+
+//////
+// Можно так же дистроктуризировать массивы
+
+// const cars = ['mazda', 'bmw', 'audi', 'mers', 'Zil'];
+const cars = [
+    ['mazda', 'bmw'],
+    ['audi', 'mers'], 'Zil'
+];
+
+// const [a, b, c] = cars; // если хотим пропустить один из параметров const [a,, b, c] = cars;
+// console.log(a);
+// console.log(b);
+// console.log(c);
+
+// можно получить отдельно каждый элемент массива
+// и работают параметры по умолч
+// const [
+//     [a, b],
+//     [c, d], e = 'volvo'
+// ] = cars;
+// console.log(a);
+// console.log(b);
+// console.log(c);
+// console.log(d);
+// console.log(e);
+
+// так же работают рест
+// const [
+//     [a, b],
+//     [...c], // мы получаем весь массив с и d но если будут и другие праметры в c то получим и их
+//     e = 'volvo'
+// ] = cars;
+// console.log(a);
+// console.log(b);
+// console.log(c);
+// console.log(e);
+
+
+// Можно применить одновременно деструктеризацию массива и объекта
+
+// const carModel = {
+//     brand: 'volvo',
+//     models: {
+//         sedan: ['s60', 's90'],
+//         cross: ['v60', 'v90']
+//     }
+// };
+
+// // дестр передаем параметры в переменные
+// const {
+//     models: {
+//         sedan: [s1, s2],
+//         cross: [c1, c2]
+//     }
+// } = carModel;
+// console.log(s1, s2, c1, c2); // вывели переменные
+
+// Раньше было так
+// получение объекта из переменных
+// const car5 = 'bentley';
+// const cycle = 'bmx';
+// const bike = 'honda';
+
+// const transport = {
+//     car: car5,
+//     cycle: cycle,
+//     bike: bike,
+//     ride: function () {
+//         console.log('go');
+//     }
+// };
+// transport.ride();
+// console.log(transport);
+
+
+// сейчас так
+// const car5 = 'bentley';
+// const cycle = 'bmx';
+// const bike = 'honda';
+
+// const transport = {
+//     car5,
+//     cycle,
+//     bike,
+//     ride() {
+//         console.log('gogo');
+//     }
+// };
+// transport.ride();
+// console.log(transport);
+
+/////
+// новый метод объекта assign() -- при помощи записываем в объект обновленные данные
+// const transport = {
+//     car5: 'bentley',
+//     cycle: 'bmx',
+//     bike: 'honda'
+// };
+
+// const newTransport = {
+//     bike: 'suzuki',
+//     quadBike: 'polaris'
+// };
+
+
+// Object.assign(transport, newTransport); //все данные с объекта newTransport запишутся в transport
+//существующие перезапишутся а новые добавятся
+// что бы не перезаписывать существ а добавить как новые то
+// const currentTransport = Object.assign({}, transport, newTransport);
+// // можно создать копию
+// const currentTransport2 = Object.assign({}, transport);
+// console.log(currentTransport2);
+
+/////////////////////////
+// объединение объектов ссамыми актуальными данными
+// const curTrans = {
+//     ...transport,
+//     ...newTransport,
+//     ...currentTransport2
+// };
+// console.log(curTrans);
+
+// так же можно задать и новое значение и методы как обычное свойство
+// const ship = 'Photinia';
+// const carTrans = {
+//     ...transport,
+//     ...newTransport,
+//     ...currentTransport2,
+//     ship,
+//     ride() {
+//         console.log('Hello');
+//     }
+// };
+// console.log(carTrans);
+// carTrans.ride();
+
+
+///////////////////////////////////////
+//Коллекции Map и Set
+// в которых можно хранить данные кроме как в массивах и объектах
+
+// созд объект
+// const obj = {
+//     a: 5,
+//     b: 10
+// };
+// console.log(obj);
+// объекты содержат ключи только строки(ключ всегда строка)
+// у объекта нет свойства ленгс(длинна) можно только так Object.keys(obj).length
+
+////
+// map -- решает эти проблеммы
+// хранит ключ значение
+// ключем может быть любое значение
+// порядок по мере добавления
+
+// const map = new Map();
+
+// можно передавать при создании
+const map = new Map(
+    // можно передавать при создании ввиде массива
+    [
+        [2019, 'audi'],
+        ['joker', 1]
+    ]);
+
+// при помощи set добавим(передадим) свойства в обект
+map.set('car', {
+    brand: 'mazda',
+    model: '3'
+});
+
+map.set(777, 'три топора');
+
+map.set(null, 'даже так');
+
+map.set(NaN, 'Ух ты');
+
+map.set(undefined, 'неожиданно');
+
+const obj = {
+    name: 'Vova',
+    age: 38
+};
+map.set(obj, 123);
+
+const func = () => {
+    console.log('Hello');
+};
+map.set(func, 'ухх')
+    // можно так вызвать один за другим
+    .set(false, true);
+
+console.log(map);
+
+
+// при помощи get получим свойства из обекта
+console.log(map.get(func));
+
+//при помощи has проверим наличие
+console.log(map.has(123));
+
+// при помощи size получим кол-во элементов
+console.log(map.size);
+
+// создадим новую коллекцию
+const collectMap = new Map([
+    ['Hello', 'world'],
+    ['year', 1812]
+]);
+console.log(collectMap);
+
+// метод delite -- удаление
+collectMap.delete('year');
+console.log(collectMap);
+
+//метод clear -- удаляет все элементы
+collectMap.clear();
+console.log(collectMap);
+
+//from--объеденит объект
+const arr33 = Array.from(map);
+console.log(arr33);
+
+//forEach 
+map.forEach((value, key) => {
+    console.log(`ключ: ${key} значение: ${value}`);
+});
+
+//for of
+for (let [key, value] of map) {
+    console.log(`ключ: ${key} значение: ${value}`);
+};
+
+// Когда стоит использовать map:
+// 1 когда ключи разных типов
+// 2 если ключи генерируются на этапе выполнения когда - то есть они динамические
+// 3 если выполняется много действий с парой ключ - значение
+// 4 если необходимо переберать ключ - значение
+
+
+///////////////
+// Колекция set -- для хранения уникальных значений
+
+const cars1 = new Set();
+
+cars1.add('mazda');
+cars1.add('volvo');
+cars1.add('Bmw');
+// если продублировать значения то не добавятся-- хранит только уникальные
+
+console.log(cars1);
+
+// геттер сета-- size
+console.log(cars1.size);
+
+// так же может содержать любые типы данных
+// так же работает метод has
+// так же работает delete
+// так же работает clear
+// так же работает короткий синтакс добавления
+// так же добавляются при создании(объявлении) через массив
+
+// forEach
+cars1.forEach((elem) => {
+    console.log(elem);
+});
+
+//деструктур
+const [car2, car3] = cars1;
+console.log(car2);
+console.log(car3);
+
+// при помощи spred оператора можно привратить в массив
+console.log([...cars1]);
+
+// можем объединять
+const caars = new Set(['mazda', 'Volvo', 'bmw']);
+const newCaars = new Set(['toyota', 'zil', 'volvo']);
+
+const allCaars = new Set([...caars, ...newCaars]);
+console.log(allCaars);
+//volvo перезаписалась тк хранит ток уникал знач
+
+
+// Когда стоит применять Set:
+// 1 когда часто приходится проверять имеюься значения или нет
