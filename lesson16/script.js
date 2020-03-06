@@ -5,9 +5,7 @@
 ///////////////////////////////////////////
 
 
-const isNumber = (n) => {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-};
+const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
 
 
 //получение данных со страницы
@@ -157,6 +155,9 @@ class AppData {
     startBtn.style.display = 'none';
     canсelBtn.style.display = 'block';
 
+    ///
+    depositCheck.disabled = true;
+
   };
 
   // Сброс 
@@ -230,6 +231,8 @@ class AppData {
 
     //возвращаем селект депозит
     depositBank.disabled = false;
+
+    depositCheck.disabled = false;
   };
 
 
