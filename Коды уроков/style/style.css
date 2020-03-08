@@ -1,0 +1,19 @@
+.cont {
+    background-color: aqua;
+    width: 1000px;
+    height: 700px;
+}
+
+.airplane {
+    background-color: #e23804;
+    width: 100px;
+    height: 50px;
+    position: relative;
+}
+
+.worm {
+    background-color: #0ac739;
+    width: 30px;
+    height: 20px;
+    position: relative;
+}

@@ -524,8 +524,8 @@
 // one(two);
 
 
-///// Чистые Функции //////
 
+///// Чистые Функции //////
 
 // Детерминированная функция зависит только от входных данных
 // Это и есть читсая функция -- зависит только от входных данных
@@ -2140,177 +2140,177 @@
 // Rest параметр
 
 // раньше было так
-function test() {
-    console.log(arguments); // получили псевдомассив с преданными параметрами
-    // а если хотели наст массив то надо было писать так
-    const arg = Array.prototype.slice.call(arguments);
-    console.log(arg);
-}
-test('red', 5, 12, 'black', [], true, 9);
+// function test() {
+//     console.log(arguments); // получили псевдомассив с преданными параметрами
+//     // а если хотели наст массив то надо было писать так
+//     const arg = Array.prototype.slice.call(arguments);
+//     console.log(arg);
+// }
+// test('red', 5, 12, 'black', [], true, 9);
 
-// теперь так 
-function test2(...arr) { //... rest параметр
-    console.log(arr);
-};
-test2('red', 5, 12, 'black', [], true, 9); // если не передать аргументы то получим просто пустой массив
+// // теперь так 
+// function test2(...arr) { //... rest параметр
+//     console.log(arr);
+// };
+// test2('red', 5, 12, 'black', [], true, 9); // если не передать аргументы то получим просто пустой массив
 
 
-// если на пример передаем не все параметры то не переданые тоже запишутся в массив
+// // если на пример передаем не все параметры то не переданые тоже запишутся в массив
 
-function test3(a, b, c, ...arr) { // ... rest парметр всегда идет последним
-    console.log(a, b, c);
-    console.log(arr);
-};
-test3('red', 5, 12, 'black', [], true, 9);
+// function test3(a, b, c, ...arr) { // ... rest парметр всегда идет последним
+//     console.log(a, b, c);
+//     console.log(arr);
+// };
+// test3('red', 5, 12, 'black', [], true, 9);
 
-/////////////////
-// spread -- оператор
-// раньше получали прараметры из массива так
+// /////////////////
+// // spread -- оператор
+// // раньше получали прараметры из массива так
+// // const arr = ['red', 5, 12];
+// // const arr2 = ['black', true];
+
+// // function test5(a, b, c, d, e) {
+// //     console.log(a, b, c);
+// //     console.log(d, e);
+
+// // }
+
+// // test5(arr[0], arr[1], arr[2], arr2[0], arr2[1]);
+
+// // // сейчас получаем так
+// // test5(...arr, ...arr2);
+
+// // При помощи spread можно собрать из нескольких массивов один
 // const arr = ['red', 5, 12];
 // const arr2 = ['black', true];
 
-// function test5(a, b, c, d, e) {
-//     console.log(a, b, c);
-//     console.log(d, e);
+// // const arr3 = [...arr, ...arr2];
+// // console.log(arr3);
 
-// }
-
-// test5(arr[0], arr[1], arr[2], arr2[0], arr2[1]);
-
-// // сейчас получаем так
-// test5(...arr, ...arr2);
-
-// При помощи spread можно собрать из нескольких массивов один
-const arr = ['red', 5, 12];
-const arr2 = ['black', true];
-
-// const arr3 = [...arr, ...arr2];
+// // так же можно комбенировать с доп параметрами
+// const arr3 = [1, ...arr, 55, ...arr2];
 // console.log(arr3);
 
-// так же можно комбенировать с доп параметрами
-const arr3 = [1, ...arr, 55, ...arr2];
-console.log(arr3);
-
-// так же можно преобразовать ДОМ коллекцию в массив
-// есть 5 картинок
-// const allImg = document.querySelectorAll('img');
-// console.log(allImg); // nodelist
-// const newImg = [...allimg];
-// console.log(newImg); // массив
+// // так же можно преобразовать ДОМ коллекцию в массив
+// // есть 5 картинок
+// // const allImg = document.querySelectorAll('img');
+// // console.log(allImg); // nodelist
+// // const newImg = [...allimg];
+// // console.log(newImg); // массив
 
 
-//////
-// Деструктиризация объекта
-const car = {
-    brand: 'Mazda',
-    model: 3,
-    color: 'red',
-    options: {
-        abs: true,
-        doors: 4
-    }
-};
+// //////
+// // Деструктиризация объекта
+// const car = {
+//     brand: 'Mazda',
+//     model: 3,
+//     color: 'red',
+//     options: {
+//         abs: true,
+//         doors: 4
+//     }
+// };
 
-// раньше присваивали свойства в переменную так
-// const brand = car.brand;
-// console.log(brand);
+// // раньше присваивали свойства в переменную так
+// // const brand = car.brand;
+// // console.log(brand);
 
-// сейчас так
-const {
-    brand,
-    color,
-    model
-} = car;
+// // сейчас так
+// const {
+//     brand,
+//     color,
+//     model
+// } = car;
 
-console.log(brand, model, color);
-const {
-    options: {
-        abs,
-        doors
-    }
-} = car;
-console.log(doors, abs);
+// console.log(brand, model, color);
+// const {
+//     options: {
+//         abs,
+//         doors
+//     }
+// } = car;
+// console.log(doors, abs);
 
-// поместим свойства в переменные
-const {
-    options: {
-        doors: carDoors,
-        abs: carAbs
-    }
-} = car;
-console.log(carDoors, carAbs);
+// // поместим свойства в переменные
+// const {
+//     options: {
+//         doors: carDoors,
+//         abs: carAbs
+//     }
+// } = car;
+// console.log(carDoors, carAbs);
 
-// если мы не знвем есть ли свойство то можем задать по умолчанию
-const {
-    // turbo,
-    turbo = true
-} = car;
-console.log(turbo);
-// не получится со вложенными свойствами options: { color = 'red'}
+// // если мы не знвем есть ли свойство то можем задать по умолчанию
+// const {
+//     // turbo,
+//     turbo = true
+// } = car;
+// console.log(turbo);
+// // не получится со вложенными свойствами options: { color = 'red'}
 
-// но есть способ!
-const {
-    sumOptions: {
-        color2 = 'red'
-    } = {}
-} = car;
-console.log(color2);
+// // но есть способ!
+// const {
+//     sumOptions: {
+//         color2 = 'red'
+//     } = {}
+// } = car;
+// console.log(color2);
 
 
-// ПРИМЕНЕНИЕ! есть ф-ция кот принимает объект
-// const createCar = (car) => {
-//     console.log(`Запущено производство автомобиля ${car.brand} ${car.model}
-//     цвет кузова: ${car.color}
-//     цвет салона: ${car.colorInt}`);
+// // ПРИМЕНЕНИЕ! есть ф-ция кот принимает объект
+// // const createCar = (car) => {
+// //     console.log(`Запущено производство автомобиля ${car.brand} ${car.model}
+// //     цвет кузова: ${car.color}
+// //     цвет салона: ${car.colorInt}`);
+// // };
+// // // передаем объект
+// // // нужно передавать Все свойства
+// // createCar({
+// //     brand: 'Mazda',
+// //     model: 3,
+// //     color: 'blue',
+// //     colorInt: 'black'
+// // });
+
+// // можно так же деструкторизировать для того что бы задать праметры по умолчанию
+// const createCar = ({
+//     brand = 'BMW',
+//     model = 'x3',
+//     color = 'white',
+//     colorInt = 'yellow'
+// }) => {
+//     console.log(`Запущено производство автомобиля ${brand} ${model}
+//     цвет кузова: ${color}
+//     цвет салона: ${colorInt}`);
 // };
 // // передаем объект
 // // нужно передавать Все свойства
 // createCar({
 //     brand: 'Mazda',
 //     model: 3,
-//     color: 'blue',
+//     color: 'blue', // если не предать то будут те что по умолч
 //     colorInt: 'black'
 // });
 
-// можно так же деструкторизировать для того что бы задать праметры по умолчанию
-const createCar = ({
-    brand = 'BMW',
-    model = 'x3',
-    color = 'white',
-    colorInt = 'yellow'
-}) => {
-    console.log(`Запущено производство автомобиля ${brand} ${model}
-    цвет кузова: ${color}
-    цвет салона: ${colorInt}`);
-};
-// передаем объект
-// нужно передавать Все свойства
-createCar({
-    brand: 'Mazda',
-    model: 3,
-    color: 'blue', // если не предать то будут те что по умолч
-    colorInt: 'black'
-});
+// //даже если передать пустой объект то все будет оке
+// // передадуться праметры по умолч
+// createCar({});
 
-//даже если передать пустой объект то все будет оке
-// передадуться праметры по умолч
-createCar({});
-
-// так же можно использовать рест параметры
-const {
-    ...options
-} = car;
-console.log(options);
+// // так же можно использовать рест параметры
+// const {
+//     ...options
+// } = car;
+// console.log(options);
 
 
-//////
-// Можно так же дистроктуризировать массивы
+// //////
+// // Можно так же дистроктуризировать массивы
 
-// const cars = ['mazda', 'bmw', 'audi', 'mers', 'Zil'];
-const cars = [
-    ['mazda', 'bmw'],
-    ['audi', 'mers'], 'Zil'
-];
+// // const cars = ['mazda', 'bmw', 'audi', 'mers', 'Zil'];
+// const cars = [
+//     ['mazda', 'bmw'],
+//     ['audi', 'mers'], 'Zil'
+// ];
 
 // const [a, b, c] = cars; // если хотим пропустить один из параметров const [a,, b, c] = cars;
 // console.log(a);
@@ -2462,131 +2462,488 @@ const cars = [
 // const map = new Map();
 
 // можно передавать при создании
-const map = new Map(
-    // можно передавать при создании ввиде массива
-    [
-        [2019, 'audi'],
-        ['joker', 1]
-    ]);
+// const map = new Map(
+//     // можно передавать при создании ввиде массива
+//     [
+//         [2019, 'audi'],
+//         ['joker', 1]
+//     ]);
 
-// при помощи set добавим(передадим) свойства в обект
-map.set('car', {
-    brand: 'mazda',
-    model: '3'
-});
+// // при помощи set добавим(передадим) свойства в обект
+// map.set('car', {
+//     brand: 'mazda',
+//     model: '3'
+// });
 
-map.set(777, 'три топора');
+// map.set(777, 'три топора');
 
-map.set(null, 'даже так');
+// map.set(null, 'даже так');
 
-map.set(NaN, 'Ух ты');
+// map.set(NaN, 'Ух ты');
 
-map.set(undefined, 'неожиданно');
+// map.set(undefined, 'неожиданно');
 
-const obj = {
-    name: 'Vova',
-    age: 38
+// const obj = {
+//     name: 'Vova',
+//     age: 38
+// };
+// map.set(obj, 123);
+
+// const func = () => {
+//     console.log('Hello');
+// };
+// map.set(func, 'ухх')
+//     // можно так вызвать один за другим
+//     .set(false, true);
+
+// console.log(map);
+
+
+// // при помощи get получим свойства из обекта
+// console.log(map.get(func));
+
+// //при помощи has проверим наличие
+// console.log(map.has(123));
+
+// // при помощи size получим кол-во элементов
+// console.log(map.size);
+
+// // создадим новую коллекцию
+// const collectMap = new Map([
+//     ['Hello', 'world'],
+//     ['year', 1812]
+// ]);
+// console.log(collectMap);
+
+// // метод delite -- удаление
+// collectMap.delete('year');
+// console.log(collectMap);
+
+// //метод clear -- удаляет все элементы
+// collectMap.clear();
+// console.log(collectMap);
+
+// //from--объеденит объект
+// const arr33 = Array.from(map);
+// console.log(arr33);
+
+// //forEach 
+// map.forEach((value, key) => {
+//     console.log(`ключ: ${key} значение: ${value}`);
+// });
+
+// //for of
+// for (let [key, value] of map) {
+//     console.log(`ключ: ${key} значение: ${value}`);
+// };
+
+// // Когда стоит использовать map:
+// // 1 когда ключи разных типов
+// // 2 если ключи генерируются на этапе выполнения когда - то есть они динамические
+// // 3 если выполняется много действий с парой ключ - значение
+// // 4 если необходимо переберать ключ - значение
+
+
+// ///////////////
+// // Колекция set -- для хранения уникальных значений
+
+// const cars1 = new Set();
+
+// cars1.add('mazda');
+// cars1.add('volvo');
+// cars1.add('Bmw');
+// // если продублировать значения то не добавятся-- хранит только уникальные
+
+// console.log(cars1);
+
+// // геттер сета-- size
+// console.log(cars1.size);
+
+// // так же может содержать любые типы данных
+// // так же работает метод has
+// // так же работает delete
+// // так же работает clear
+// // так же работает короткий синтакс добавления
+// // так же добавляются при создании(объявлении) через массив
+
+// // forEach
+// cars1.forEach((elem) => {
+//     console.log(elem);
+// });
+
+// //деструктур
+// const [car2, car3] = cars1;
+// console.log(car2);
+// console.log(car3);
+
+// // при помощи spred оператора можно привратить в массив
+// console.log([...cars1]);
+
+// // можем объединять
+// const caars = new Set(['mazda', 'Volvo', 'bmw']);
+// const newCaars = new Set(['toyota', 'zil', 'volvo']);
+
+// const allCaars = new Set([...caars, ...newCaars]);
+// console.log(allCaars);
+// //volvo перезаписалась тк хранит ток уникал знач
+
+
+// // Когда стоит применять Set:
+// // 1 когда часто приходится проверять имеюься значения или нет
+
+
+
+// //////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////
+// ////////////Доп урок СПОСОБЫ перебора массива!/////////////////////////
+// //////////////////////////////////////////////////////////////////////
+
+// const number = [54, 20, 80, -35, 32, 29, 15];
+// // const names = ['vladiMir', 'Mark', 'Logan', 'VicTor', 'maks', 'Kate', 'Alex'];
+// let names = ['vladiMir', 'Mark', 'Logan', 'VicTor', 'maks', 'Kate', 'Alex'];
+// const mix = ['Glo', 25, true, 'Academy', '15', -2, null];
+// const badNam = [45, 20, 74, -35, 'hi', 32, 29, 5];
+
+
+// // for
+// for (let i = 0; i < mix.length; i++) {
+//     console.log(mix[i]); //массив микс а в нем элемент i
+// };
+
+// // for in 
+// for (let index in mix) { // обратились именно к индексу(номер)
+//     console.log(index); // выполнит столько интераций сколько элементов в массиве
+//     // покажет индекс каждого элемента
+//     console.log(mix[index]); // опкажет сами элементы
+// }
+
+// // for of 
+// for (let elem of mix) {
+//     console.log(elem); // элементы 
+// };
+
+// // forEach
+// mix.forEach((item, index, arr) => { // элемент тндекс и сам массив
+//     // console.log(item);
+//     // console.log(index);
+//     console.table({
+//         item,
+//         index
+//     });
+//     // console.log(arr);
+// });
+// // в стрелочную функцию нельзя передать this
+// mix.forEach((item) => console.log(item));
+
+
+
+// ////////////
+// //исправим слова (нач сзагл)
+// for (let i = 0; i < names.length; i++) {
+//     names[i] = names[i][0].toUpperCase() + names[i].slice(1).toLowerCase();
+//     // каждый элемент = берем 1ю букву элемента и кверх регистр + прибавляем остаток слова с первого индекса и приводим к ниж рег
+// };
+// console.log(names);
+
+// //тоже ток forEach
+// names.forEach(function (item, i, arr) {
+//     arr[i] = item[0].toUpperCase() + item.slice(1).toLowerCase();
+// });
+// console.log(names);
+
+
+// //map -- вернет новый массив(может принимать три параметра)
+// const correctNames = names.map(function (item) {
+//     return item[0].toUpperCase() + item.slice(1).toLowerCase();
+// });
+// console.log(correctNames);
+// //так же можно поместить в переменную только надо names задать через let
+// names = names.map(function (item) {
+//     return item[0].toUpperCase() + item.slice(1).toLowerCase();
+// });
+// console.log(names);
+// //та же запись ток стрелкой
+// names = names.map((item) => item[0].toUpperCase() + item.slice(1).toLowerCase());
+// console.log(names);
+
+
+// //выведим только строки из массива
+// // задаем пустой массив
+// let forWords = [];
+
+// for (let i = 0; i < mix.length; i++) {
+//     if (typeof mix[i] === 'string' && isNaN(mix[i])) { // isNaN(mix[i]) -- уберет если можно привести к числу '15'
+//         forWords.push(mix[i]);
+//     }
+// }
+// console.log(forWords);
+
+
+// // filter -- добавит все что true
+// let filterWords = mix.filter((elem) => {
+//     return typeof elem === 'string' && isNaN(elem);
+// });
+// // let filterWords = mix.filter((elem) => typeof elem === 'string' && isNaN(elem));
+// console.log(filterWords);
+
+// // добавим в массив все положительные числа
+// let positiveNumbers = number.filter((item) => item > 0);
+// console.log(positiveNumbers);
+
+
+// //проверим есть ли в массиве числа
+// // остановится как найдет число
+// // созд прем со значением false
+// let result = false;
+// for (let i = 0; i < mix.length; i++) {
+//     if (typeof mix[i] === 'number') {
+//         result = true;
+//         break;
+//     }
+// }
+// console.log(result);
+
+// //тоже самое можно сделать методом some(получаем true/false)
+// let result2 = number.some(function (item) {
+//     return typeof item !== 'number'; // есть ли что то кроме чисел
+//     // return item < 0; // есть ли отриц числа
+//     // return typeof item === 'number'; // есть ли числа
+// });
+// console.log(result2);
+
+
+// // every -- проверяет каждый элемент если все элементы подходят условию вернет true
+// // то есть проверяет все ли элементы подходят условию 
+// let result3 = number.every(function (item) {
+//     return typeof item === 'number';
+// });
+// console.log(result3);
+
+
+// //reduce -- работает с лева на право
+// // reduceRight -- работает с право на лево
+
+
+// // цикл как раньше было бы
+// let sum = 0;
+// for (let i = 0; i < number.length; i++) {
+//     sum += number[i]; // суммма всех элементов
+// }
+// console.log(sum);
+
+// // новый
+// let sum2 = number.reduce(function (accumulator, item) { // accumulator -- содержит в себе первый элемент скоторого нач инрац 
+//     console.log(accumulator); //54
+//     return accumulator + item; // 54+20..74+80 ...
+// }, 0); // ,0 либо другое число -- точка отпрвления для редусе(стоит задавать)
+// console.log(sum2);
+
+
+// //сгрупируем двумерный массив
+
+// const arr1 = [
+//     [1, 2],
+//     [3, 4],
+//     [5, 6]
+// ];
+
+// const res = arr1.reduce((acc, item) => acc.concat(item), []); // reduce -- переберает
+// //concat -- собирает
+// console.log(res);
+
+
+
+/////////////////////////////////////////////
+////практика пререборов
+
+
+
+
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+//////////урок 17////////////////////////////
+///////////////////////////////////////////
+
+// Скрипты и время выполнения
+// setTimeout, setInterval и requestAnimationFrame
+// Объект Date
+
+// setTimeout(function(){}, 3000)--первый параметр колбек фция второй время задержки в милисек
+
+// setTimeout(function () { //через сколько времени запустить фцию
+//     console.log('dfgafbbrearber');
+
+// }, 3000);
+
+// setInterval(() => {
+//     console.log('234567');
+// }, 2000);
+
+// let count = 0;
+// let idIntterval =
+//     console.log( // можем узнать идентификатор интервала(скок раз типа)
+//         setInterval(() => { // с каким интервалом запускать
+//             count++;
+//             console.log('asdfghjk ' + count);
+//         }, 2000)
+//     );
+
+
+// остановим
+
+// let count = 0;
+// let idInterval = setInterval(function () {
+//     count++;
+//     console.log('asdfghjk ' + count);
+// }, 2000);
+// // setInterval(idIntterval);
+
+// setTimeout(function () {
+//     clearInterval(idInterval);
+// }, 6000);
+
+
+/////////////////////////////////////////////////
+// передача именной функции
+// let getMessage = function (name) {
+//     console.log('Hello ' + name + '!');
+// };
+// let idInterval = setInterval(getMessage, 2000, 'Vova');
+
+// let idTimeout = setTimeout(getMessage, 5000, 'Vov4ik');
+// clearTimeout();
+///////////////надо разобраться!!!!////////////////////
+
+
+// есть 2 картинки (самолет и парашутист)
+// получаем
+// let worm = document.querySelector('.worm'),
+//     airplane = document.querySelector('.airplane'),
+//     // счетчик
+//     count = 0;
+
+// фунуция парашутист прыг
+// рекурсивный
+// let wormDown = function () {
+//     count++;
+//     worm.style.top = count + 'px'; // парашут
+//     airplane.style.left = count * 2 + 'px'; // самолет полетел
+//     // setTimeout(wormDown, 10);// так падает в беск
+//     if (count < 350) {
+//         setTimeout(wormDown, 10); // 350px вниз и стоп
+//     }
+// };
+// setTimeout(wormDown, 10);
+
+
+let worm = document.querySelector('.worm'),
+    airplane = document.querySelector('.airplane'),
+    // счетчик
+    count = 0;
+
+let flyInterval;
+
+// let flyAnimate = function () {
+//     flyInterval = requestAnimationFrame(flyAnimate);
+//     count++;
+//     if (count < 100) {
+//         worm.style.top = count + 'px';
+//         airplane.style.left = count * 2 + 'px';
+//     } else if (count < 200) {
+//         airplane.style.left = count * 2 + 'px';
+//     } else {
+//         cancelAnimationFrame(flyInterval);
+//     }
+// };
+// flyInterval = requestAnimationFrame(flyAnimate);
+
+let animate = true;
+
+function fly() {
+    document.addEventListener('click', function () {
+
+        let flyAnimate = function () {
+            flyInterval = requestAnimationFrame(flyAnimate);
+            count++;
+            if (count < 100) {
+                worm.style.top = count + 'px';
+                airplane.style.left = count * 2 + 'px';
+            } else if (count < 200) {
+                airplane.style.left = count * 2 + 'px';
+            } else {
+                cancelAnimationFrame(flyInterval);
+            }
+            return flyInterval;
+        };
+
+        if (animate) {
+            flyInterval = requestAnimationFrame(flyAnimate);
+            animate = false;
+        } else {
+            animate = true;
+            cancelAnimationFrame(flyInterval);
+        }
+
+    });
 };
-map.set(obj, 123);
-
-const func = () => {
-    console.log('Hello');
-};
-map.set(func, 'ухх')
-    // можно так вызвать один за другим
-    .set(false, true);
-
-console.log(map);
+fly();
 
 
-// при помощи get получим свойства из обекта
-console.log(map.get(func));
-
-//при помощи has проверим наличие
-console.log(map.has(123));
-
-// при помощи size получим кол-во элементов
-console.log(map.size);
-
-// создадим новую коллекцию
-const collectMap = new Map([
-    ['Hello', 'world'],
-    ['year', 1812]
-]);
-console.log(collectMap);
-
-// метод delite -- удаление
-collectMap.delete('year');
-console.log(collectMap);
-
-//метод clear -- удаляет все элементы
-collectMap.clear();
-console.log(collectMap);
-
-//from--объеденит объект
-const arr33 = Array.from(map);
-console.log(arr33);
-
-//forEach 
-map.forEach((value, key) => {
-    console.log(`ключ: ${key} значение: ${value}`);
-});
-
-//for of
-for (let [key, value] of map) {
-    console.log(`ключ: ${key} значение: ${value}`);
-};
-
-// Когда стоит использовать map:
-// 1 когда ключи разных типов
-// 2 если ключи генерируются на этапе выполнения когда - то есть они динамические
-// 3 если выполняется много действий с парой ключ - значение
-// 4 если необходимо переберать ключ - значение
 
 
-///////////////
-// Колекция set -- для хранения уникальных значений
+//////////////////////////////
+// class объект Date
+// месяци с нуля
+// дни недели с нуля
+let date = new Date(); // показывает текущее время
+// let date = new Date('10 march 1987'); // можем передать так
+// let date = new Date(1982, 6, 27); // можно и так ток месяци с нуля!
+// let date = new Date(1982, 6, 27, 10, 30, 23); // тоже самое ток с часами и мин сек
+// console.log(date);
 
-const cars1 = new Set();
+// получаем даты и время
+// console.log('year: ' + date.getFullYear());
+// console.log('month: ' + date.getMonth());
+// console.log('Day of month: ' + date.getDate());
+// console.log('Day of week: ' + date.getDay());
+// console.log('Hours ' + date.getHours());
+// console.log('Minutes ' + date.getMinutes());
+// console.log('Seconds ' + date.getSeconds());
+// console.log('Milisec ' + date.getMilliseconds());
 
-cars1.add('mazda');
-cars1.add('volvo');
-cars1.add('Bmw');
-// если продублировать значения то не добавятся-- хранит только уникальные
+//по гривичу
+// console.log('month: ' + date.getUTCMonth());
 
-console.log(cars1);
+// передаем даты и время
+// date.setFullYear(2100);
+// date.setFullYear(2100, 2, 10);
+// date.setMonth(6, 10);
+// date.setDate(21);
+// console.log(date);
 
-// геттер сета-- size
-console.log(cars1.size);
+// узнаем какое число будет через 100 дней
+// date.setDate(date.getDate() + 100);
+// console.log(date);
+//что было 100 дней назад
+// date.setDate(date.getDate() - 100);
+// console.log(date);
 
-// так же может содержать любые типы данных
-// так же работает метод has
-// так же работает delete
-// так же работает clear
-// так же работает короткий синтакс добавления
-// так же добавляются при создании(объявлении) через массив
+// console.log(date.getTime()); //суолько мили сек с нг 1970г 00.00.00
 
-// forEach
-cars1.forEach((elem) => {
-    console.log(elem);
-});
+// можно получить в виде строки
+console.log(date.toTimeString());
+console.log(date.toDateString());
+console.log(date.toLocaleTimeString());
+console.log(date.toLocaleDateString());
+console.log(date.toLocaleTimeString('ru'));
+console.log(date.toLocaleDateString('ru'));
+console.log(date.toLocaleTimeString('en'));
+console.log(date.toLocaleDateString('en'));
 
-//деструктур
-const [car2, car3] = cars1;
-console.log(car2);
-console.log(car3);
-
-// при помощи spred оператора можно привратить в массив
-console.log([...cars1]);
-
-// можем объединять
-const caars = new Set(['mazda', 'Volvo', 'bmw']);
-const newCaars = new Set(['toyota', 'zil', 'volvo']);
-
-const allCaars = new Set([...caars, ...newCaars]);
-console.log(allCaars);
-//volvo перезаписалась тк хранит ток уникал знач
-
-
-// Когда стоит применять Set:
-// 1 когда часто приходится проверять имеюься значения или нет
+/////
+console.log(date.toISOString());
+console.log(date.toISOString().substr(0, 10));
+//
+// милисек во время вызова
+console.log(Date.now());
+console.log(Date.parse('27 july 1982'));

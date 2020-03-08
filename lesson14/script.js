@@ -103,7 +103,7 @@ const AppData = function () {
 AppData.prototype.start = function () {
 
   ///блокировка инпутов ввода 
-  let allInputs = document.querySelector('.data').querySelectorAll('input[type="text"]');
+  allInputs = document.querySelector('.data').querySelectorAll('input[type="text"]');
   allInputs.forEach(function (item) {
     item.disabled = true;
   });
@@ -272,7 +272,6 @@ AppData.prototype.addExpensesBlock = function () {
 
 
   // добавляем поля при нажатии плюса обязательные расходы
-
   let cloneExpensesItems = expensesItems[0].cloneNode(true);
 
   //пустые новые инпуты
@@ -378,10 +377,7 @@ AppData.prototype.getTargetMonth = function () {
   const missionPeriod = Math.ceil(targetAmount.value / this.budgetMonth);
   this.period = missionPeriod;
   return missionPeriod;
-  // if (missionPeriod < 0) {} else {}
-
 };
-
 
 
 // наличие сумма и процент по депозиту
