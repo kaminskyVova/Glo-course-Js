@@ -2836,12 +2836,12 @@
 // setTimeout(wormDown, 10);
 
 
-let worm = document.querySelector('.worm'),
-    airplane = document.querySelector('.airplane'),
-    // счетчик
-    count = 0;
+// let worm = document.querySelector('.worm'),
+//     airplane = document.querySelector('.airplane'),
+//     // счетчик
+//     count = 0;
 
-let flyInterval;
+// let flyInterval;
 
 // let flyAnimate = function () {
 //     flyInterval = requestAnimationFrame(flyAnimate);
@@ -2857,36 +2857,39 @@ let flyInterval;
 // };
 // flyInterval = requestAnimationFrame(flyAnimate);
 
-let animate = true;
+/////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+// let animate = true;
 
-function fly() {
-    document.addEventListener('click', function () {
+// function fly() {
+//     document.addEventListener('click', function () {
 
-        let flyAnimate = function () {
-            flyInterval = requestAnimationFrame(flyAnimate);
-            count++;
-            if (count < 100) {
-                worm.style.top = count + 'px';
-                airplane.style.left = count * 2 + 'px';
-            } else if (count < 200) {
-                airplane.style.left = count * 2 + 'px';
-            } else {
-                cancelAnimationFrame(flyInterval);
-            }
-            return flyInterval;
-        };
+//         let flyAnimate = function () {
+//             flyInterval = requestAnimationFrame(flyAnimate);
+//             count++;
+//             if (count < 100) {
+//                 worm.style.top = count + 'px';
+//                 airplane.style.left = count * 2 + 'px';
+//             } else if (count < 200) {
+//                 airplane.style.left = count * 2 + 'px';
+//             } else {
+//                 cancelAnimationFrame(flyInterval);
+//             }
+//             return flyInterval;
+//         };
 
-        if (animate) {
-            flyInterval = requestAnimationFrame(flyAnimate);
-            animate = false;
-        } else {
-            animate = true;
-            cancelAnimationFrame(flyInterval);
-        }
+//         if (animate) {
+//             flyInterval = requestAnimationFrame(flyAnimate);
+//             animate = false;
+//         } else {
+//             animate = true;
+//             cancelAnimationFrame(flyInterval);
+//         }
 
-    });
-};
-fly();
+//     });
+// };
+// fly();
 
 
 
@@ -2895,7 +2898,7 @@ fly();
 // class объект Date
 // месяци с нуля
 // дни недели с нуля
-let date = new Date(); // показывает текущее время
+// let date = new Date(); // показывает текущее время
 // let date = new Date('10 march 1987'); // можем передать так
 // let date = new Date(1982, 6, 27); // можно и так ток месяци с нуля!
 // let date = new Date(1982, 6, 27, 10, 30, 23); // тоже самое ток с часами и мин сек
@@ -2931,19 +2934,105 @@ let date = new Date(); // показывает текущее время
 // console.log(date.getTime()); //суолько мили сек с нг 1970г 00.00.00
 
 // можно получить в виде строки
-console.log(date.toTimeString());
-console.log(date.toDateString());
-console.log(date.toLocaleTimeString());
-console.log(date.toLocaleDateString());
-console.log(date.toLocaleTimeString('ru'));
-console.log(date.toLocaleDateString('ru'));
-console.log(date.toLocaleTimeString('en'));
-console.log(date.toLocaleDateString('en'));
+// console.log(date.toTimeString());
+// console.log(date.toDateString());
+// console.log(date.toLocaleTimeString());
+// console.log(date.toLocaleDateString());
+// console.log(date.toLocaleTimeString('ru'));
+// console.log(date.toLocaleDateString('ru'));
+// console.log(date.toLocaleTimeString('en'));
+// console.log(date.toLocaleDateString('en'));
 
-/////
-console.log(date.toISOString());
-console.log(date.toISOString().substr(0, 10));
-//
-// милисек во время вызова
-console.log(Date.now());
-console.log(Date.parse('27 july 1982'));
+// /////
+// console.log(date.toISOString());
+// console.log(date.toISOString().substr(0, 10));
+// //
+// // милисек во время вызова
+// console.log(Date.now());
+// console.log(Date.parse('27 july 1982'));
+
+
+
+/////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+//////////////////урок 18//////////////////////////////
+/////////////////////////////////////////////////////
+
+// Параметры документа, окна и работа с ними
+
+// console.log(screen) // выводит парамеиры экрана
+
+// console.dir(document);
+// //получим размеры видимости экрана(документа)
+// // на это повлиять не можем
+// const height = document.documentElement.clientHeight;
+// const width = document.documentElement.clientWidth;
+// console.dir(height);
+// console.dir(width);
+
+// // на это повлиять можем
+// const scroll = document.documentElement.scrollTop; // покажет скок от верха
+
+// // присвоим
+// const scroll = document.documentElement.scrollTop = 0;
+// const scroll = document.documentElement.scrollTop = 500;
+
+
+//////////////////////////////
+// есть блок со скролом и вноем всякое
+
+// const block = document.querySelector('.boxing');
+// console.dir(block);
+
+// const height = block.clientHeight;
+// const width = block.clientWidth;
+// показывет ширину высоту именно видимого без падинг шмадинг
+// и плюс скрол
+// если box-sizing то учитывает все!
+
+// если нужны все размеры с прокруткой и тд то
+// offsetHeight
+// offsetWidth
+// const width = block.offsetWidth;
+
+// узнать размеры бокса и того что за скролом
+// scrollHeidth
+// scrollWidth
+
+// повесим на кнопку событие что бы открыть весь бокс
+const boxBtn = document.querySelector('.box-button');
+boxBtn.addEventListener('click', () => {
+    block.style.height = `${block.scrollHeight}px`;
+    block.style.width = `${block.scrollWidht}px`;
+});
+//покажет на скок прокрутили
+console.log(block.scrollTop);
+console.log(block.scrollLeft);
+// можно указавать
+console.log(block.scrollTop = 100);
+console.log(block.scrollLeft = 100);
+
+boxBtn.addEventListener('click', () => {
+    //каждый раз плюс 10
+    block.scrollTop += 10;
+    block.scrollLeft += 10;
+});
+
+boxBtn.addEventListener('click', () => {
+    //каждый раз право низ на 10
+    block.scrollBy(10, 10);
+    // на сколько переместится одинажды
+    block.scrollTo(10, 10);
+});
+
+
+boxBtn.addEventListener('click', () => {
+    //получим все координаты
+    console.log(block.getBoundingClientRect());
+    // так же можно получить конкретные
+    console.log(block.getBoundingClientRect().top);
+    //можем поместить в переменную
+    const domRect = block.getBoundingClientRect();
+    console.log(domRect.top);
+    console.log(domRect.right);
+});
