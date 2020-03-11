@@ -3000,39 +3000,147 @@
 // scrollWidth
 
 // повесим на кнопку событие что бы открыть весь бокс
-const boxBtn = document.querySelector('.box-button');
-boxBtn.addEventListener('click', () => {
-    block.style.height = `${block.scrollHeight}px`;
-    block.style.width = `${block.scrollWidht}px`;
-});
-//покажет на скок прокрутили
-console.log(block.scrollTop);
-console.log(block.scrollLeft);
-// можно указавать
-console.log(block.scrollTop = 100);
-console.log(block.scrollLeft = 100);
+// const boxBtn = document.querySelector('.box-button');
+// boxBtn.addEventListener('click', () => {
+//     block.style.height = `${block.scrollHeight}px`;
+//     block.style.width = `${block.scrollWidht}px`;
+// });
+// //покажет на скок прокрутили
+// console.log(block.scrollTop);
+// console.log(block.scrollLeft);
+// // можно указавать
+// console.log(block.scrollTop = 100);
+// console.log(block.scrollLeft = 100);
 
-boxBtn.addEventListener('click', () => {
-    //каждый раз плюс 10
-    block.scrollTop += 10;
-    block.scrollLeft += 10;
-});
+// boxBtn.addEventListener('click', () => {
+//     //каждый раз плюс 10
+//     block.scrollTop += 10;
+//     block.scrollLeft += 10;
+// });
 
-boxBtn.addEventListener('click', () => {
-    //каждый раз право низ на 10
-    block.scrollBy(10, 10);
-    // на сколько переместится одинажды
-    block.scrollTo(10, 10);
-});
+// boxBtn.addEventListener('click', () => {
+//     //каждый раз право низ на 10
+//     block.scrollBy(10, 10);
+//     // на сколько переместится одинажды
+//     block.scrollTo(10, 10);
+// });
 
 
-boxBtn.addEventListener('click', () => {
-    //получим все координаты
-    console.log(block.getBoundingClientRect());
-    // так же можно получить конкретные
-    console.log(block.getBoundingClientRect().top);
-    //можем поместить в переменную
-    const domRect = block.getBoundingClientRect();
-    console.log(domRect.top);
-    console.log(domRect.right);
+// boxBtn.addEventListener('click', () => {
+//     //получим все координаты
+//     console.log(block.getBoundingClientRect());
+//     // так же можно получить конкретные
+//     console.log(block.getBoundingClientRect().top);
+//     //можем поместить в переменную
+//     const domRect = block.getBoundingClientRect();
+//     console.log(domRect.top);
+//     console.log(domRect.right);
+// });
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+///////////////////урок 19//////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+// Делегирование -- навешивание собитыя на родителя вместо каждого эллемента
+
+// let buttons = document.querySelectorAll('.button');
+// const content = document.querySelector('.content'),
+//     wrapButtons = document.querySelector('.wrapper-button'),
+//     addButton = document.querySelector('.add__button');
+
+// const changeText = (element) => {
+//     content.textContent = element.textContent;
+//     // buttons = document.querySelectorAll('.button');
+// };
+
+// // const changeText = (event) => {
+// //     content.textContent = event.target.textContent;
+// // };
+
+// buttons.forEach((elem) => {
+//     elem.addEventListener('click', changeText);
+//     // elem.addEventListener('click', () => {
+//     //     changeText(elem);
+//     // });  
+// });
+
+// // for (let i = 0; i < buttons.length; i++) {
+// //     buttons[i].addEventListener('click', () => {
+// //         changeText(buttons[i]);
+// //     });
+// // };
+
+// const getButton = () => {
+//     const newButton = buttons[0].cloneNode();
+//     let textButton = buttons.length + 1;
+//     if (textButton < 10) {
+//         textButton = `0${textButton}`;
+//     }
+//     newButton.textContent = textButton;
+//     // newButton.addEventListener('click', changeText);
+//     wrapButtons.appendChild(newButton);
+//     buttons = document.querySelectorAll('.button');
+
+//     newButton.addEventListener('click', () => {
+//         changeText(newButton);
+//     });
+
+
+//     // newButton.addEventListener('click', changeText);
+
+// };
+// addButton.addEventListener('click', getButton);
+
+
+////////////////////////////////////////////////////////
+let buttons = document.querySelectorAll('.button');
+const content = document.querySelector('.content'),
+    wrapButtons = document.querySelector('.wrapper-button'),
+    addButton = document.querySelector('.add__button');
+
+const changeText = (event) => {
+    content.textContent = event.target.textContent;
+};
+
+// buttons.forEach((elem) => {
+//     elem.addEventListener('click', changeText);
+// });
+
+const getButton = () => {
+    const newButton = buttons[0].cloneNode();
+    let textButton = buttons.length + 1;
+    if (textButton < 10) {
+        textButton = `0${textButton}`;
+    }
+    newButton.textContent = textButton;
+    // newButton.addEventListener('click', changeText);
+    wrapButtons.appendChild(newButton);
+    buttons = document.querySelectorAll('.button');
+};
+addButton.addEventListener('click', getButton);
+
+wrapButtons.addEventListener('click', () => {
+    // console.log(event.target);
+    // if (event.target.tagName !== 'BUTTON') {
+    //     return;
+    // }
+    // changeText(event);
+
+    // if (!event.target.classList.contains('button')) {
+    //     return;
+    // }
+    // changeText(event);
+
+    // if (!event.target.matches('button')) {
+    //     return;
+    // }
+    // changeText(event);
+
+    if (!event.target.matches('#super')) { // кнопка 6
+        return;
+    }
+    changeText(event);
 });

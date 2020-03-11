@@ -15,10 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-
   function countTimer(deadline) {
-
-    // стоп
     function timeEnd(timer) {
       if (timer.timeRemaining < 0) {
         return {
@@ -34,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function getTimeRemaining() {
-
       let dateStop = new Date(deadline).getTime(),
         dateNow = new Date().getTime(),
         timeRemaining = (dateStop - dateNow) / 1000,
@@ -50,8 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
 
-    function updateClock() {
 
+    function updateClock() {
       const timer = getTimeRemaining();
       timerHours.textContent = zeroBefore(timer.hours);
       timerMinutes.textContent = zeroBefore(timer.minutes);
@@ -61,10 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   setInterval(countTimer, 1000, '12 march 2020');
 
+
   //меню с урока
-
   const toggleMenu = () => {
-
     const btnMenu = document.querySelector('.menu'),
       menu = document.querySelector('menu'),
       closeBtn = document.querySelector('.close-btn'),
@@ -76,168 +71,50 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         menu.style.transform = `translate(-100%)`;
       }
-
-      // menu.classList.toggle('active-menu');
     };
 
     btnMenu.addEventListener('click', hendlerMenu);
     closeBtn.addEventListener('click', hendlerMenu);
-
-    // for (let i = 0; i < menuItems.length; i++) {
-    //   menuItems[i].addEventListener('click', hendlerMenu);
-    // }
-
     menuItems.forEach((elem) => elem.addEventListener('click', hendlerMenu));
-
   };
-
   toggleMenu();
 
+
   //popUp
-  const togglePopUp = () => {
+  const togglePopup = () => {
     const popup = document.querySelector('.popup'),
       popupBtn = document.querySelectorAll('.popup-btn'),
+      popupContent = popup.querySelector('.popup-content'),
       popupClose = document.querySelector('.popup-close');
-    let popupContent = popup.querySelector('.popup-content');
-    let count = 0;
 
 
-    popupBtn.forEach((elem) => {
+    popupBtn.forEach(elem => {
       elem.addEventListener('click', () => {
-        // popup.style.display = 'block';
 
-        // popupContent.style.top = 0;
-        if (window.innerWidth > 768) {
-          let poupDown = () => {
-            popup.style.display = 'block';
+        let count = 0;
+        let openPopup;
+
+        let animate = function () {
+          popup.style.display = 'block';
+          if (window.innerWidth > 768) {
+            openPopup = requestAnimationFrame(animate);
             count++;
-            // popupContent.style.top = (count * 7 + 'px');
-            if (count < 10) {
-              // setTimeout(poupDown, 10);
-              popupContent.style.top = (count * 7 + 'px');
+            if (count < 15) {
+              popupContent.style.top = 0;
+              popupContent.style.top = count * 6 + 'px';
             } else {
-              clearInterval(idInterval);
+              cancelAnimationFrame(openPopup);
             }
           }
-          setTimeout(poupDown, 10);
-          let idInterval = setInterval(poupDown, 10);
-        } else {
-          popup.style.display = 'block';
-        }
-      })
-
-
+        };
+        openPopup = requestAnimationFrame(animate);
+      });
     });
 
-
-
+    ////////////////////////////////////////////////////////////////
     popupClose.addEventListener('click', () => {
-      // popup.style.display = 'none';
-      if (window.innerWidth > 768) {
-        let poupCl = () => {
-          count--;
-          // popupContent.style.top = (count * 10 + 'px');
-          // popup.style.top = (count * 10 + 'px');
-
-          if (count < 10) {
-            // setTimeout(poupCl, 10);
-            popupContent.style.top = (count * 10 + 'px');
-            popup.style.top = (count * 10 + 'px');
-          } else {
-            clearInterval(idInterval);
-          }
-        }
-        setTimeout(poupCl, 10);
-        let idInterval = setInterval(poupCl, 10);
-      } else {
-        popup.style.display = 'none';
-      }
+      popup.style.display = 'none';
     });
-
   };
-  togglePopUp();
-
+  togglePopup();
 });
-
-/////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-
-// function date() {
-//   let day = new Date();
-//   const weekDay = new Array(7);
-//   weekDay[0] = "Воскресенье";
-//   weekDay[1] = "Понедельник";
-//   weekDay[2] = "Вторник";
-//   weekDay[3] = "Среда";
-//   weekDay[4] = "Четверг";
-//   weekDay[5] = "Пятница";
-//   weekDay[6] = "Суббота";
-
-
-//   function checkTime(item) {
-//     if (item < 10) {
-//       item = "0" + item;
-//     }
-//     return item;
-//   }
-//   let date = new Date();
-//   let consoleTime = (checkTime('Текущее время: ' + date.getHours()) + ":" + checkTime(date.getMinutes()) + ":" + checkTime(date.getSeconds()));
-
-//   function amPm() {
-//     if (date > 12) {
-//       consoleTime = consoleTime + ' PM';
-//     } else {
-//       consoleTime = consoleTime + ' AM';
-//     }
-//   };
-//   amPm();
-
-//   // t.setHours(23);
-
-//   function dayNight() {
-
-//     let time = date.getHours();
-//     if (time >= 6 && time <= 11) {
-//       console.log('Доброе утро');
-//     } else if (time > 11 && time < 18) {
-//       console.log('Добрый день');
-//     } else if (time > 18 && time <= 22) {
-//       console.log('Добрый вечер');
-//     } else {
-//       console.log('Пора спать какая тебе на хрен разница что за день был???');
-//     }
-//   };
-//   dayNight();
-
-
-//   let month = new Date();
-//   const monthNow = new Array(12);
-//   monthNow[0] = "Январь";
-//   monthNow[1] = "Февраль";
-//   monthNow[2] = "Март";
-//   monthNow[3] = "Апрель";
-//   monthNow[4] = "Май";
-//   monthNow[5] = "Июнь";
-//   monthNow[6] = "Июль";
-//   monthNow[7] = "Август";
-//   monthNow[8] = "Сентябрь";
-//   monthNow[9] = "Октябрь";
-//   monthNow[10] = "Ноябрь";
-//   monthNow[11] = "Декабрь";
-//   console.log("Текущий месяц: " + monthNow[month.getMonth()]);
-
-//   console.log("Сегодня: " + weekDay[day.getDay()]);
-//   console.log(consoleTime);
-
-//   function newYear() {
-//     let lastDay = new Date('31 december 2020').getTime(),
-//       nowDay = new Date().getTime(),
-//       howDays = Math.floor((((((lastDay - nowDay) / 1000) / 60) / 60) / 24));
-//     console.log('До Нового Года осталось: ' + howDays + 'дней');
-
-//   }
-//   newYear();
-
-// };
-// date();

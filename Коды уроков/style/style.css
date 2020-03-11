@@ -17,3 +17,32 @@
     height: 20px;
     position: relative;
 }
+
+
+/**/
+.add__button {
+    display: block;
+    margin-bottom: 20px;
+    ;
+}
+
+.content {
+    font-size: 100px;
+    padding-left: 50px;
+}
+
+.add__button {
+    margin-left: 42px;
+}
+
+.button {
+    display: block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.wrapper-button {
+    width: 220px;
+    display: flex;
+    flex-wrap: wrap;
+}
