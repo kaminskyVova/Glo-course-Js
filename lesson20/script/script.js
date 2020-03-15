@@ -180,6 +180,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // слайдер
 
+  // задание добавление точек для слайдера
+  const addNewDots = () => {
+    let slide = document.querySelectorAll('.portfolio-item'),
+      dots = document.querySelector('.portfolio-dots');
+    // console.log(slide);
+
+    let newDots = [];
+    // console.log(newDots)
+    for (let i = 0; i < slide.length; i++) {
+      newDots[i] = document.createElement('li');
+      // console.log(newDots[i]);
+      newDots[i].classList.add('dot');
+      dots.appendChild(newDots[i]);
+      newDots[0].classList.add('dot-active');
+      // console.log(dots);
+    }
+
+  };
+  addNewDots();
+
+  /////////////////////////////////////////////////////////
+
   const slider = () => {
     const slide = document.querySelectorAll('.portfolio-item'),
       btn = document.querySelectorAll('.portfolio-btn'),
@@ -292,34 +314,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-
     startSlide(2000);
 
   };
 
   slider();
-
-
-  ///////////////////////////////////////////////////////////////
-  // задание добавление точек для слайдера
-  // const addNewDots = () => {
-  //   let slide = document.querySelectorAll('.portfolio-item'),
-  //     dots = document.querySelector('.portfolio-dots');
-  //   // console.log(slide);
-
-  //   let newDots = [];
-  //   // console.log(newDots)
-  //   for (let i = 0; i < slide.length; i++) {
-  //     newDots[i] = document.createElement('li');
-  //     // console.log(newDots[i]);
-  //     newDots[i].classList.add('dot');
-  //     dots.appendChild(newDots[i]);
-  //     newDots[0].classList.add('dot-active');
-  //     // console.log(dots);
-  //   }
-
-  // };
-  // addNewDots();
-  /////////////////////////////////////////////////////////
 
 });
