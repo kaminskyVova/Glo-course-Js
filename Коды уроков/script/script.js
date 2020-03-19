@@ -3096,51 +3096,277 @@
 
 
 ////////////////////////////////////////////////////////
-let buttons = document.querySelectorAll('.button');
-const content = document.querySelector('.content'),
-    wrapButtons = document.querySelector('.wrapper-button'),
-    addButton = document.querySelector('.add__button');
+// let buttons = document.querySelectorAll('.button');
+// const content = document.querySelector('.content'),
+//     wrapButtons = document.querySelector('.wrapper-button'),
+//     addButton = document.querySelector('.add__button');
 
-const changeText = (event) => {
-    content.textContent = event.target.textContent;
-};
+// const changeText = (event) => {
+//     content.textContent = event.target.textContent;
+// };
 
-// buttons.forEach((elem) => {
-//     elem.addEventListener('click', changeText);
+// // buttons.forEach((elem) => {
+// //     elem.addEventListener('click', changeText);
+// // });
+
+// const getButton = () => {
+//     const newButton = buttons[0].cloneNode();
+//     let textButton = buttons.length + 1;
+//     if (textButton < 10) {
+//         textButton = `0${textButton}`;
+//     }
+//     newButton.textContent = textButton;
+//     // newButton.addEventListener('click', changeText);
+//     wrapButtons.appendChild(newButton);
+//     buttons = document.querySelectorAll('.button');
+// };
+// addButton.addEventListener('click', getButton);
+
+// wrapButtons.addEventListener('click', () => {
+//     // console.log(event.target);
+//     // if (event.target.tagName !== 'BUTTON') {
+//     //     return;
+//     // }
+//     // changeText(event);
+
+//     // if (!event.target.classList.contains('button')) {
+//     //     return;
+//     // }
+//     // changeText(event);
+
+//     // if (!event.target.matches('button')) {
+//     //     return;
+//     // }
+//     // changeText(event);
+
+//     if (!event.target.matches('#super')) { // кнопка 6
+//         return;
+//     }
+//     changeText(event);
 // });
 
-const getButton = () => {
-    const newButton = buttons[0].cloneNode();
-    let textButton = buttons.length + 1;
-    if (textButton < 10) {
-        textButton = `0${textButton}`;
-    }
-    newButton.textContent = textButton;
-    // newButton.addEventListener('click', changeText);
-    wrapButtons.appendChild(newButton);
-    buttons = document.querySelectorAll('.button');
-};
-addButton.addEventListener('click', getButton);
 
-wrapButtons.addEventListener('click', () => {
-    // console.log(event.target);
-    // if (event.target.tagName !== 'BUTTON') {
-    //     return;
-    // }
-    // changeText(event);
 
-    // if (!event.target.classList.contains('button')) {
-    //     return;
-    // }
-    // changeText(event);
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////урок 21///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 
-    // if (!event.target.matches('button')) {
-    //     return;
-    // }
-    // changeText(event);
+// Работа с атрибутами. Дата Атрибуты
 
-    if (!event.target.matches('#super')) { // кнопка 6
-        return;
-    }
-    changeText(event);
+// Регулярные Выражения
+
+// Работа с атрибутами:
+
+// есть заголовок линк и картинка
+
+// мф можем получить любой атрибут
+// console.log(header.style);
+// console.log(link.style);
+// console.log(img.style);
+
+// console.log(header.id);
+// console.log(header.title);
+// console.log(header.style);
+
+// можем задать
+// header.title = 'заголовок'; // появляется в верстке
+
+// свойство атрибьютс
+// console.log(link.attributes); // видим все атрибуты:href,style,class
+// изменять на прямую мы не можем
+
+// методы для работы с атрибутами
+// hes get set remuve
+
+// hasAttribute('alt'); проверяет наличие атрибута возвращает true/false
+// getAttribute('alt'); возвращает значение атрибута
+// setAttribute('alt', 'новый атрибут'); устанавливает атрибут
+// removeAttribute('alt'); удаляет атрибут
+
+
+// работа с классами
+// img.className(); выводит класс
+// можем установить класс
+// img.className = 'new_class можно установить несколько через пробел';
+// img.classList получаем массив с класаами
+// classList.contains(''); проверяет есть ли такой класс
+// classList.add(''); добавляет
+// classList.remove(''); удалаяет
+// classList.toggle(''); удаляет если есть добавляет если нет
+
+// Дата атрибуты
+// img.dataset получили атрибуты data-img=
+// img.dataset.img получили значение по кключу miniglo.jpg
+// Headers.dataset.aboutHeader = 'заголовок'; добавился data-about-header 
+
+// скрипт
+img.addEventListener('mouseenter', (e) => {
+    event.target.src = event.target.dataset.img;
+});
+// мы получим атрибут дата у аимдж и запишим его в срс
+
+
+/////////////////
+// РЕГУЛЯРКИ
+
+
+// создадим
+
+const reg = /привет/; //будет искать в строке
+
+// или
+const reg2 = new RegExp('привет');
+
+// методы
+// console.log(reg.test('всем привет, добро пожаловать'));вернет тру тк нащел слово привет
+// console.log(reg.test('всем хай, добро пожаловать'); вернет фолс тк нет привет
+
+// можно и так
+console.log(/привет/.test('всем привет, добро пожаловать'));
+console.log(/привет/.test('всем хай, добро пожаловать'));
+
+// если хотим проверить строку кот начинается с определенного слова
+// то перед ним должны поставить^
+console.log(/^привет/.test('всем привет, добро пожаловать'));
+console.log(/^привет/.test('привет друзья, добро пожаловать'));
+
+// если хотим проверить на конец то 
+console.log(/пожаловать$/.test('привет друзья, добро пожаловать'));
+
+//если хотим проверить что бы начиналась и заканчивалась
+console.log(/^привет$/.test('привет друзья, добро пожаловать,привет'));
+
+///////////
+const string = `Привет друг, добро пожаловать, прошу проходи`;
+
+const res = string.match(/п/);
+console.log(res) // вернет массив с подстрокой где находиться п index19
+
+////////////
+// Флаги
+// const res = string.match(/п/i); игнор регистра первая буква index0
+
+//  g-- флаг для глобального поиска
+const res = string.match(/п/ig); // вернет массив из всех п
+
+
+///////////////////////////////
+// спец символы регулярок
+
+// const string2 = 'спецсимволы: + * . ^ $ ][ {} () ? / \';
+
+const res = string.match(/\+/ig); // получим +
+const res = string.match(/./g); // получим всю строку в массив разбитую на каждый символ
+// [] -- нужны для объединения что бы задать диапозон
+const res = string.match(/[абв]/g); // найдем все буквы абв
+
+const res2 = 'hello my darling eba nah, просто черти что текст';
+// найдем все русские буквы
+const res3 = string.match(/[А-Яа-я]/g);
+const res4 = res2.match(/[a-z]/g);
+// i--вернет все без регистра
+
+// найдем цифры
+const res5 = 'мой номер 8-999-34-54-890';
+const res6 = res5.match(/[0-9]/g);
+
+// получим все символы кроме цифр
+const res6 = res5.match(/[^0-9]/g);
+// кроме букв
+const res6 = res5.match(/[^а-я]/g);
+
+// есть заданные выражения
+// цифры
+const res6 = res5.match(/\d/g);
+// не цыфры
+const res6 = res5.match(/\D/g);
+// все пробелы и переносы
+const res6 = res5.match(/\s/g);
+// все без пробелов и переносов
+const res6 = res5.match(/\S/g);
+
+// все буквы цифры и ниж подчерк
+const res6 = res5.match(/\w/g);
+// и все наоборот
+const res6 = res5.match(/\W/g);
+
+const string6 = 'номер телефона 09-848-77-32 номер домофона 48485';
+const res7 = string6.match(/телефона|домофона/gi);
+const res7 = string6.match(/(теле|домо)фона/gi);
+
+// девушка
+// дедушка
+// const res7 = string6.match(/де[вд]|ушка/gi);
+
+
+////////////////
+// кантификация -- показать кол-во повторений
+
+const res8 = string.match(/номера?/gi); // символ а
+// или 
+const res8 = string.match(/н(ом?)ера/gi); // символы в скобках
+
+const res8 = string.match(/номера+/gi); // все а одно должно быть
+const res8 = string.match(/номера*/gi); // любое кол во а есть или нет
+const res8 = string.match(/номера{2}/gi); // два символа а
+
+const res8 = string.match(/о.{3}о/gi); // до трех о
+const res8 = string.match(/о.{1,3}о/gi); // от 1 до трех о
+
+
+// получим только тег
+
+const res87 = 'div class = "best" > Привет мир! < /div>';
+
+const ress = res87.match(/<.*>/g); //получили всю строку
+const ress = res87.match(/<.*?>/g); //получили каждый див отдельно
+
+////////
+// positive look ahead
+// negative look ahead
+// вперед смотрящее утверждение 
+// назад смторящее
+
+const res = string.match(/номер(?= домофона)/gi); // вернет тот номер кот перед домофоном
+
+const res = string.replace(/номер(?= домофона)/gi, 'пинкод'); // заменит номер на пинкод
+
+const res = string.match(/номер(?! домофона)/gi); //найдет первый номер
+const res = string.match(/номер(?! домофона)/gi, 'пинкод'); //заменит превый номер на пинкод
+
+const res = string.search(/номер/gi); // вернет индекс н в строке
+
+
+//////
+// можно найти номер телефона или меил по регулярке
+
+string = 'мой почтовый ящик kaminskijvova59@gmail.com или kamok@bk.ru пишите! номер телефона +972545473335 0546784432 +7(999)123-456-7';
+
+const email = string.match(/\w+@\w.+\.\w{2,4}/g);
+
+const tel = string.match(/+?[789]([-()]*\d){10, 15}/g); // получим все варианты номеров но можно поднастроить
+const tel = string.replace(/+?[789]([-()]*\d){10, 15}/g, '***'); // скроим все номера ***
+
+///
+const res = string.split(' ') // выделим каждое слово отдельно
+// s -- пробелы табы и переносы строк
+const res = string.split(/[\s,]+/);
+
+
+//инпуты
+const input = document.querySelector('input'), // input
+    output = document.querySelector('.output'); // div
+
+input.addEventListener('input', () => {
+    let text = input.value;
+    // output.textContent = text; // выводим текст
+    output.textContent = text.replace(/a/g, ''); // исключаем букву а
+    output.textContent = text.replace(/блядь/g, '***'); // заменим на ***
+    output.textContent = text.replace(/\d/g, ''); // сключим цифры
+    output.textContent = text.replace(/\D/g, ''); // исключим буквы
+    output.textContent = text.replace(/вова/gi, (match) => match.toUpperCase()); // ВОВА
+    output.textContent = text.replace(/(\w+)@(\w+\.\w{2,3})/gi, (match, val1, val2) => val2); // выведет все что после @
+    input.value = input.value.replace(/\d/g, ''); // только буквы
 });
