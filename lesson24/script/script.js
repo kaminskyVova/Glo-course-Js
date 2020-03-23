@@ -479,6 +479,6 @@ document.addEventListener('DOMContentLoaded', () => {
     request.send(JSON.stringify(body));
 
   };
-  sendForm();
+  // sendForm();
 
 });
