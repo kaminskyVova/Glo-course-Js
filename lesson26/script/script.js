@@ -1,8 +1,6 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
-  
+
   let timerHours = document.querySelector('#timer-hours'),
     timerMinutes = document.querySelector('#timer-minutes'),
     timerSeconds = document.querySelector('#timer-seconds'),
@@ -403,30 +401,47 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+  const formData = new FormData(form);
+
+  formData.forEach((val, key) => {
+    body[key] = val;
+  });
+
+
   const formHandler = (event) => {
     event.preventDefault();
-
-    const formRequest = sendForm(event.target);
-    console.log(formRequest);
-
-    formRequest.then(() => {
-      successHandler();
-      setTimeout(()=>{
-        statusMessage.textContent = '';
-      }, 3000)
-    });
-
-    formRequest.catch(() => {
-      errorHandler();
-      setTimeout(()=>{
-        statusMessage.textContent = '';
-      }, 7000)
-    })
 
     const inputsForm = event.target.querySelectorAll('input');
     inputsForm.forEach((input) => {
       input.value = '';
     });
+
+
+    // const formRequest = sendForm(event.target);
+
+    return fetch('./server.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
+      })
+
+
+
+      .then(() => {
+        successHandler();
+        setTimeout(() => {
+          statusMessage.textContent = '';
+        }, 3000)
+      })
+
+      .catch(() => {
+        errorHandler();
+        setTimeout(() => {
+          statusMessage.textContent = '';
+        }, 7000)
+      })
 
   };
 
@@ -459,7 +474,12 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
 
+
+
+
   const sendForm = (form) => {
+
+
     return new Promise((resolve, reject) => {
       form.appendChild(statusMessage);
       const request = new XMLHttpRequest();
@@ -482,13 +502,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       request.open('POST', './server.php');
       request.setRequestHeader('Content-Type', 'application/json');
-      const formData = new FormData(form);
+      // const formData = new FormData(form);
       let body = {};
 
 
-      formData.forEach((val, key) => {
-        body[key] = val;
-      });
+      // formData.forEach((val, key) => {
+      //   body[key] = val;
+      // });
 
       request.send(JSON.stringify(body));
 
