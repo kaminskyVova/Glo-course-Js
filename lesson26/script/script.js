@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let timerHours = document.querySelector('#timer-hours'),
     timerMinutes = document.querySelector('#timer-minutes'),
     timerSeconds = document.querySelector('#timer-seconds'),
-    deadline = '17 march 2020';
+    deadline = '1 april 2020';
 
   //доб 0
   function zeroBefore(number) {
@@ -401,42 +401,50 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  const formData = new FormData(form);
-
-  formData.forEach((val, key) => {
-    body[key] = val;
-  });
-
 
   const formHandler = (event) => {
     event.preventDefault();
+
+    let body = {};
+    const formData = new FormData(event.target);
+
+    formData.forEach((val, key) => {
+      body[key] = val;
+    });
+
+    event.target.appendChild(statusMessage);
+
+    statusMessage.textContent = loadMesage;
 
     const inputsForm = event.target.querySelectorAll('input');
     inputsForm.forEach((input) => {
       input.value = '';
     });
 
-
-    // const formRequest = sendForm(event.target);
-
     return fetch('./server.php', {
         method: 'POST',
+        mode: 'same-origin',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(form)
+        body: JSON.stringify(body)
       })
 
-
-
-      .then(() => {
-        successHandler();
+    
+      .then(response => {
+        if (response.status !== 200) {
+          throw new Error('Status network was not 200');
+        }else if (response.status == 200){
+          successHandler();
+        }
+        
         setTimeout(() => {
           statusMessage.textContent = '';
         }, 3000)
       })
 
-      .catch(() => {
+      .catch(error => {
+    
         errorHandler();
         setTimeout(() => {
           statusMessage.textContent = '';
@@ -475,45 +483,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+  // const sendForm = (form) => {
 
+  //   return new Promise((resolve, reject) => {
+  //     form.appendChild(statusMessage);
+  //     const request = new XMLHttpRequest();
 
-  const sendForm = (form) => {
+  //     request.addEventListener('readystatechange', () => {
+  //       statusMessage.textContent = loadMesage;
 
+  //       if (request.readyState !== 4) {
+  //         return;
+  //       }
+  //       if (request.status === 200) {
+  //         resolve();
+  //         successHandler()
+  //       } else {
+  //         reject();
+  //         errorHandler()
+  //       }
 
-    return new Promise((resolve, reject) => {
-      form.appendChild(statusMessage);
-      const request = new XMLHttpRequest();
+  //     });
 
-      request.addEventListener('readystatechange', () => {
-        statusMessage.textContent = loadMesage;
+  //     request.open('POST', './server.php');
+  //     request.setRequestHeader('Content-Type', 'application/json');
 
-        if (request.readyState !== 4) {
-          return;
-        }
-        if (request.status === 200) {
-          resolve();
-          successHandler()
-        } else {
-          reject();
-          errorHandler()
-        }
+  //     // const formData = new FormData(form);
+  //     // let body = {};
+  //     // formData.forEach((val, key) => {
+  //     //   body[key] = val;
+  //     // });
 
-      });
+  //     request.send(JSON.stringify(body));
 
-      request.open('POST', './server.php');
-      request.setRequestHeader('Content-Type', 'application/json');
-      // const formData = new FormData(form);
-      let body = {};
+  //   });
 
-
-      // formData.forEach((val, key) => {
-      //   body[key] = val;
-      // });
-
-      request.send(JSON.stringify(body));
-
-    });
-
-  };
+  // };
 
 });
