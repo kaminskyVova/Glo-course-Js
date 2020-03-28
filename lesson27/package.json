@@ -1,16 +1,14 @@
 {
-  "name": "glo-3d",
-  "version": "1.1.1",
+  "name": "lesson27",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "glo-3d"
-  ],
-  "author": "Kaminsky Vladimir",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
