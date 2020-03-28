@@ -312,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+
   // проверка на число в инпут
   const inputNum = document.querySelectorAll('.calc-item');
 
@@ -322,8 +323,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  //калькулятор
 
+
+  //калькулятор
   const calc = (price = 100) => {
     const calcBlock = document.querySelector('.calc-block'),
       calcType = document.querySelector('.calc-type'),
